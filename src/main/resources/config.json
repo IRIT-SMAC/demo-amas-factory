@@ -1,0 +1,47 @@
+{
+	"executionService":{
+		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
+		"nbThreads":8
+	},
+	"messagingService":{
+		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
+		"messageClass":"fr.irit.smac.demoamasfactory.message.impl.Message"
+	},
+	"className":"fr.irit.smac.demoamasfactory.infrastructure.impl.DemoInfrastructure",
+	"loggingService":{
+		"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
+	},
+	"hazelcastService":{
+		"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"
+	},
+	"agentHandlerService":{
+		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
+		"agentMap":{
+			"1_1":{
+				"className":"fr.irit.smac.demoamasfactory.agent.impl.NodeBehaviorImpl",
+				"id":"1_1",
+				"knowledge":{
+					"className":"fr.irit.smac.demoamasfactory.knowledge.impl.NodeKnowledgeImpl"
+				}
+				
+			},
+			"gen 20V":{
+				"className":"fr.irit.smac.demoamasfactory.agent.impl.UGeneratorBehaviorImpl",
+				"id":"gen 20V",
+				"knowledge":{
+					"className":"fr.irit.smac.demoamasfactory.knowledge.impl.UGeneratorKnowledgeImpl",
+					"id": "gen 20V",
+					"firstTerminal": "1_1",
+					"secondTerminal": "1_1",
+					"tension": 20.0
+				}
+				
+			}
+			
+		}
+		
+	},
+	"plotService":{
+		"className":"fr.irit.smac.demoamasfactory.service.plot.impl.PlotService"
+	}
+}
