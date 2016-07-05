@@ -1,11 +1,11 @@
-package fr.irit.smac.demoamasfactory.knowledge.impl;
+package fr.irit.smac.demoamasfactory.agent.features.dipole;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge;
+import fr.irit.smac.amasfactory.agent.impl.Knowledge;
 import fr.irit.smac.demoamasfactory.knowledge.IDipoleKnowledge;
 
-public class DipoleKnowledgeImpl extends SimpleKnowledge implements IDipoleKnowledge {
+public class KnowledgeDipole extends Knowledge implements IDipoleKnowledge {
 
     private static final long serialVersionUID = 1L;
 
@@ -20,12 +20,13 @@ public class DipoleKnowledgeImpl extends SimpleKnowledge implements IDipoleKnowl
     public Double    resistor;
     public Double    intensity;
 
-    public DipoleKnowledgeImpl() {
+    public KnowledgeDipole() {
         super();
     }
 
     @Override
     public String getId(Terminal terminal) {
+        
         switch (terminal) {
             case FIRST:
                 return firstTerminal;
@@ -92,7 +93,7 @@ public class DipoleKnowledgeImpl extends SimpleKnowledge implements IDipoleKnowl
 
     @Override
     public String toString() {
-        return "Dipole " + this.getId() + " " + firstTerminal + ": " + firstPotential
+        return "Dipole" + firstTerminal + ": " + firstPotential
             + "V " + secondTerminal + ": " + secondPotential + "V U="
             + tension + "V R=" + resistor + "Ohm I=" + intensity + "A.";
     }

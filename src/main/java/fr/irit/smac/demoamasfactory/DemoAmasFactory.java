@@ -16,5 +16,9 @@ public class DemoAmasFactory {
 
         DemoInfrastructure infra = demoFactory.createInfrastructure(
             ClassLoader.getSystemResourceAsStream("config.json"));
+        
+        infra.getExecutionService().step();
+        infra.getExecutionService().step();
+        infra.getExecutionService().step();
     }
 }

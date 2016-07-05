@@ -6,7 +6,7 @@ public class IntensityDirectionRequest extends DirectionRequest<Double> {
 
 	public IntensityDirectionRequest(String sender, EFeedback direction,
 			Double criticality, Double knownValue) {
-		super(sender, direction, criticality, knownValue);
+		super(EMyMessageType.INTENSITY_DIRECTION_REQUEST,sender, direction, criticality, knownValue);
 	}
 
 }

@@ -1,5 +1,7 @@
 package fr.irit.smac.demoamasfactory.message.impl;
 
+import fr.irit.smac.amasfactory.message.Message;
+import fr.irit.smac.amasfactory.message.IMessageType;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
 
 /**
@@ -10,16 +12,13 @@ import fr.irit.smac.libs.tooling.avt.EFeedback;
  */
 public class DirectionRequest<T> extends Message {
 
-	/**
-	 * 
-	 */
 	public EFeedback direction;
 	public Double criticality;
 	public T knownValue;
 
-	public DirectionRequest(String sender, EFeedback direction,
+	public DirectionRequest(IMessageType messageType, String sender, EFeedback direction,
 			Double criticality, T knownValue) {
-		super(sender);
+		super(messageType,sender);
 		this.direction = direction;
 		this.criticality = criticality;
 		this.knownValue = knownValue;

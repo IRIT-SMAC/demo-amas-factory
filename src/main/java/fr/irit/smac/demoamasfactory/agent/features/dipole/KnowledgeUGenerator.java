@@ -1,10 +1,10 @@
-package fr.irit.smac.demoamasfactory.knowledge.impl;
+package fr.irit.smac.demoamasfactory.agent.features.dipole;
 
-public class UGeneratorKnowledgeImpl extends DipoleKnowledgeImpl {
+public class KnowledgeUGenerator extends KnowledgeDipole {
 
     private static final long serialVersionUID = 1L;
 
-    public UGeneratorKnowledgeImpl() {
+    public KnowledgeUGenerator() {
         super();
     }
 

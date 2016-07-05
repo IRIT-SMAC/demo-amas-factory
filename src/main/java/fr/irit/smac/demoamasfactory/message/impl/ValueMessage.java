@@ -1,5 +1,8 @@
 package fr.irit.smac.demoamasfactory.message.impl;
 
+import fr.irit.smac.amasfactory.message.Message;
+import fr.irit.smac.amasfactory.message.IMessageType;
+
 /**
  * A message to send a value
  *
@@ -10,8 +13,8 @@ public class ValueMessage<T> extends Message {
 
 	T value;
 
-	public ValueMessage(String sender, T value) {
-		super(sender);
+	public ValueMessage(IMessageType messageType, String sender, T value) {
+		super(messageType, sender);
 		this.value = value;
 	}
 

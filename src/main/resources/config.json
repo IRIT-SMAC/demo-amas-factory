@@ -5,7 +5,7 @@
 	},
 	"messagingService":{
 		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
-		"messageClass":"fr.irit.smac.demoamasfactory.message.impl.Message"
+		"messageClass":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
 	},
 	"className":"fr.irit.smac.demoamasfactory.infrastructure.impl.DemoInfrastructure",
 	"loggingService":{
@@ -17,23 +17,147 @@
 	"agentHandlerService":{
 		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
 		"agentMap":{
-			"1_1":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.NodeBehaviorImpl",
-				"id":"1_1",
-				"knowledge":{
-					"className":"fr.irit.smac.demoamasfactory.knowledge.impl.NodeKnowledgeImpl"
+			"node1":{
+				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
+				"id":"node1",
+				"features":{
+					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"node1"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+						}
+						
+					},
+					"featureNode":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
+						},
+						"skill":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
+						}
+						
+					},
+					"featurePlot":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot"
+						},
+						"skill":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot"
+						}
+						
+					}
+					
+				}
+				
+			},
+			"node2":{
+				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
+				"id":"node2",
+				"features":{
+					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"node2"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+						}
+						
+					},
+					"featureNode":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
+						},
+						"skill":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
+						}
+						
+					},
+					"featurePlot":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot"
+						},
+						"skill":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot"
+						}
+						
+					}
+					
 				}
 				
 			},
 			"gen 20V":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.UGeneratorBehaviorImpl",
+				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentUGenerator",
 				"id":"gen 20V",
-				"knowledge":{
-					"className":"fr.irit.smac.demoamasfactory.knowledge.impl.UGeneratorKnowledgeImpl",
-					"id": "gen 20V",
-					"firstTerminal": "1_1",
-					"secondTerminal": "1_1",
-					"tension": 20.0
+				"features":{
+					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"gen 20V"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+						}
+						
+					},
+					"featureUGenerator":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.KnowledgeUGenerator",
+							"tension":20.0,
+							"firstTerminal":"node1",
+							"secondTerminal":"node2"
+						},
+						"skill":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.SkillUGenerator"
+						}
+						
+					},
+					"featurePlot":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot"
+						},
+						"skill":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot"
+						}
+						
+					}
+					
 				}
 				
 			}
