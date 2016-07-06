@@ -9,10 +9,11 @@ public class KnowledgeDipole extends Knowledge implements IDipoleKnowledge {
 
     private static final long serialVersionUID = 1L;
 
-    public Double firstPotential;
-    public Double secondPotential;
     @JsonProperty
     public Double tension;
+    
+    public Double firstPotential;
+    public Double secondPotential;
     public Double resistor;
     public Double intensity;
 

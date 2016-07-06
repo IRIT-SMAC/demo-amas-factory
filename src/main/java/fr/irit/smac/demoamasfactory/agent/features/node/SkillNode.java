@@ -1,11 +1,33 @@
 package fr.irit.smac.demoamasfactory.agent.features.node;
 
+import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.impl.Skill;
+import fr.irit.smac.amasfactory.message.IMessage;
+import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
+import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot;
+import fr.irit.smac.demoamasfactory.message.impl.IntensityMsg;
+import fr.irit.smac.demoamasfactory.message.impl.PotentialDirectionRequest;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
 
 public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
+
+    public void processMsg(IMessage message, KnowledgeSocial knowledgeSocial) {
+
+        if (message instanceof ValuePortMessage) {
+            knowledgeSocial.getValuePortMessageCollection().add((ValuePortMessage) message);
+        }
+        else if (message instanceof PortOfTargetMessage) {
+            knowledgeSocial.getPortOfTargetMessageCollection().add((PortOfTargetMessage) message);
+        }
+        else if (message instanceof PotentialDirectionRequest) {
+            knowledge.getPotentialDirectionRequest().add((PotentialDirectionRequest) message);
+        }
+        else if (message instanceof IntensityMsg) {
+            knowledge.getIntensityMsg().add((IntensityMsg) message);
+        }
+    }
 
     public void publishValue(SkillPlot<KnowledgePlot> skillPlot, String id) {
 

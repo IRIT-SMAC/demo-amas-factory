@@ -2,8 +2,6 @@ package fr.irit.smac.demoamasfactory.agent.features.plot;
 
 import java.util.function.Predicate;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import fr.irit.smac.amasfactory.agent.impl.Knowledge;
 import fr.irit.smac.libs.tooling.plot.server.AgentPlotChart;
 

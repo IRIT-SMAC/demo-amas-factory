@@ -15,29 +15,11 @@ import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
 
     @Override
-    public void processMsg(KnowledgeSocial knowledgeSocial) {
-        super.processMsg(knowledgeSocial);
+    public void processMsg(IMessage message, KnowledgeSocial knowledgeSocial) {
+        super.processMsg(message, knowledgeSocial);
 
-        IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
-        for (IMessage demoMessage : msgBox.getMsgs()) {
-            if (demoMessage instanceof IntensityDirectionRequest) {
-                IntensityDirectionRequest idr = (IntensityDirectionRequest) demoMessage;
-                EFeedback direction = idr.direction;
-                Double knownValue = idr.knownValue;
-                if (idr.getSender().equals(knowledge.equals(Terminal.SECOND.getName()))) {
-                    direction = DirectionRequest.opposite(direction);
-                    knownValue = -knownValue;
-                }
-
-                if (this.knowledge.getI().equals(knownValue)) {
-                    if (this.knowledge.getWorstIntensityCriticality() < idr.criticality) {
-                        this.knowledge.setWorstIntensityCriticality(idr.criticality);
-                        this.knowledge.setIntensityDirection(direction);
-                        // logger.debug("received I" + idr.direction + " from "
-                        // + idr.getSender());
-                    }
-                }
-            }
+        if (message instanceof IntensityDirectionRequest) {
+            this.knowledge.getIntensityDirectionRequest().add((IntensityDirectionRequest) message);
         }
     }
 

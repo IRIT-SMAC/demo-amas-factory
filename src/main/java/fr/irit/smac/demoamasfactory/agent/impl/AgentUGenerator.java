@@ -4,13 +4,13 @@ import fr.irit.smac.amasfactory.agent.features.impl.Feature;
 import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial;
 import fr.irit.smac.amasfactory.agent.impl.Agent;
-import fr.irit.smac.amasfactory.message.IMessage;
+import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.demoamasfactory.agent.features.MyFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.KnowledgeUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.SkillUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot;
-import fr.irit.smac.libs.tooling.messaging.IMsgBox;
+import fr.irit.smac.demoamasfactory.knowledge.IDipoleKnowledge.Terminal;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator, S extends SkillUGenerator<K>, P extends Feature<K, S>>
@@ -22,18 +22,27 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
     @Override
     public void perceive() {
 
-        this.getPrimaryFeature().getSkill().processMsg(this.commonFeatures.getFeatureSocial().getKnowledge());
-        // this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox().getMsgs()
-        // .forEach(m -> this.primaryFeature.getSkill().processMsg(m));
+        KnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
+        knowledgeSocial.getMsgBox().getMsgs()
+            .forEach(m -> this.primaryFeature.getSkill().processMsg(m, knowledgeSocial));
     }
 
     @Override
     public void decideAndAct() {
 
-        IMsgBox<IMessage> msgBox = this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox();
+        KnowledgeUGenerator knowledgeUGenerator = this.primaryFeature.getKnowledge();
+        
+        this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().forEach(m -> {
+            ValuePortMessage message = (ValuePortMessage) m;
+            if (message.getPort().equals(Terminal.FIRST.getName())) {
+                knowledgeUGenerator.setFirstPotential((Double) message.getValue());
+            }
+            else if (message.getPort().equals(Terminal.SECOND.getName())) {
+                knowledgeUGenerator.setSecondPotential((Double) message.getValue());
+            }
+        });
+        
         SkillPlot<KnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
-
-        KnowledgeUGenerator knowledge = this.primaryFeature.getKnowledge();
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
 
