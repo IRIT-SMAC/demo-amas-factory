@@ -1,5 +1,6 @@
 package fr.irit.smac.demoamasfactory.agent.features.dipole;
 
+import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot;
@@ -14,71 +15,80 @@ import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
 
     @Override
-    public void processMsg(IMessage m) {
-        super.processMsg(m);
-        if (m instanceof IntensityDirectionRequest) {
-            IntensityDirectionRequest idr = (IntensityDirectionRequest) m;
-            EFeedback direction = idr.direction;
-            Double knownValue = idr.knownValue;
-            if (idr.getSender().equals(knowledge.getId(Terminal.SECOND))) {
-                direction = DirectionRequest.opposite(direction);
-                knownValue = -knownValue;
-            }
+    public void processMsg(KnowledgeSocial knowledgeSocial) {
+        super.processMsg(knowledgeSocial);
 
-            if (this.knowledge.getI().equals(knownValue)) {
-                if (this.knowledge.getWorstIntensityCriticality() < idr.criticality) {
-                    this.knowledge.setWorstIntensityCriticality(idr.criticality);
-                    this.knowledge.setIntensityDirection(direction);
-//                    logger.debug("received I" + idr.direction + " from " + idr.getSender());
+        IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
+        for (IMessage demoMessage : msgBox.getMsgs()) {
+            if (demoMessage instanceof IntensityDirectionRequest) {
+                IntensityDirectionRequest idr = (IntensityDirectionRequest) demoMessage;
+                EFeedback direction = idr.direction;
+                Double knownValue = idr.knownValue;
+                if (idr.getSender().equals(knowledge.equals(Terminal.SECOND.getName()))) {
+                    direction = DirectionRequest.opposite(direction);
+                    knownValue = -knownValue;
+                }
+
+                if (this.knowledge.getI().equals(knownValue)) {
+                    if (this.knowledge.getWorstIntensityCriticality() < idr.criticality) {
+                        this.knowledge.setWorstIntensityCriticality(idr.criticality);
+                        this.knowledge.setIntensityDirection(direction);
+                        // logger.debug("received I" + idr.direction + " from "
+                        // + idr.getSender());
+                    }
                 }
             }
         }
     }
-    
+
     public void publishValues(SkillPlot<KnowledgePlot> skillPlot, String id) {
-        
+
         if (knowledge.getR() != null) {
-            skillPlot.publish("resistor", knowledge.getR(),id);
+            skillPlot.publish("resistor", knowledge.getR(), id);
         }
         if (knowledge.getI() != null) {
-            skillPlot.publish("intensity", knowledge.getI(),id);
+            skillPlot.publish("intensity", knowledge.getI(), id);
         }
         if (knowledge.getU() != null) {
-            skillPlot.publish("tension", knowledge.getU(),id);
+            skillPlot.publish("tension", knowledge.getU(), id);
         }
-//        logger.debug(knowledge.toString());
+        // logger.debug(knowledge.toString());
     }
-    
-    public void communicateIntensity(IMsgBox<IMessage> msgBox, String id) {
-        
+
+    public void communicateIntensity(KnowledgeSocial knowledgeSocial, String id) {
+
+        IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
         final Double intensity = knowledge.getI();
         if (intensity != null) {
             IntensityMsg firstMsg = new IntensityMsg(id, intensity);
-            msgBox.send(firstMsg, knowledge.getId(Terminal.FIRST));
+            msgBox.send(firstMsg, knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()).getId());
             IntensityMsg secondMsg = new IntensityMsg(id, -intensity);
-            msgBox.send(secondMsg, knowledge.getId(Terminal.SECOND));
+            msgBox.send(secondMsg, knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()).getId());
         }
     }
-    
-    public void requetPotentialUpdate(IMsgBox<IMessage> msgBox, String id) {
-        
+
+    public void requetPotentialUpdate(KnowledgeSocial knowledgeSocial, String id) {
+
+        IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
         EFeedback intensityDirection = knowledge.getIntensityDirection();
         Double worstIntensityCriticality = knowledge.getWorstIntensityCriticality();
         if (intensityDirection != null) {
             PotentialDirectionRequest firstMsg = new PotentialDirectionRequest(id,
                 DirectionRequest.opposite(intensityDirection), worstIntensityCriticality,
-                knowledge.getV(Terminal.FIRST));
-            msgBox.send(firstMsg, knowledge.getId(Terminal.FIRST));
-//            logger.debug("send V" + DirectionRequest.opposite(intensityDirection) + " to "
-//                + knowledge.getId(Terminal.FIRST));
+                knowledge.getFirstPotential());
+            msgBox.send(firstMsg, knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()).getId());
+            // logger.debug("send V" +
+            // DirectionRequest.opposite(intensityDirection) + " to "
+            // + knowledge.getId(Terminal.FIRST));
             PotentialDirectionRequest secondMsg = new PotentialDirectionRequest(id,
-                intensityDirection, worstIntensityCriticality, knowledge.getV(Terminal.SECOND));
-            msgBox.send(secondMsg, knowledge.getId(Terminal.SECOND));
-//            logger.debug("send V" + intensityDirection + " to " + knowledge.getId(Terminal.SECOND));
+                intensityDirection, worstIntensityCriticality, knowledge.getSecondPotential());
+            msgBox.send(secondMsg, knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()).getId());
+            // logger.debug("send V" + intensityDirection + " to " +
+            // knowledge.getId(Terminal.SECOND));
             // clear request
             worstIntensityCriticality = 0d;
             intensityDirection = null;
         }
     }
-    
+
 }

@@ -43,7 +43,17 @@
 					"featureSocial":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+							"outputType":"java.lang.String",
+							"portMap":{
+								"port":{
+									"id":"port",
+									"type":"java.lang.String",
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+								}
+								
+							}
+							
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
@@ -90,7 +100,17 @@
 					"featureSocial":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+							"outputType":"java.lang.String",
+							"portMap":{
+								"port":{
+									"id":"port",
+									"type":"java.lang.String",
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+								}
+								
+							}
+							
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
@@ -118,8 +138,6 @@
 					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 					"knowledge":{
 						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.KnowledgeUGenerator",
-						"firstTerminal":"node1",
-						"secondTerminal":"node2",
 						"tension":20
 					},
 					"skill":{
@@ -140,7 +158,36 @@
 					"featureSocial":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+							"outputType":"java.lang.String",
+							"portMap":{
+								"firstTerminal":{
+									"id":"node1",
+									"type":"java.lang.String",
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+								},
+								"secondTerminal":{
+									"id":"node2",
+									"type":"java.lang.String",
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+								}
+								
+							},
+							"targetSet":[
+								{
+									"agentTarget":"node1",
+									"portTarget":"port",
+									"portSource":"firstTerminal",
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+								},
+								{
+									"agentTarget":"node2",
+									"portTarget":"port",
+									"portSource":"secondTerminal",
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+								}
+								
+							]
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"

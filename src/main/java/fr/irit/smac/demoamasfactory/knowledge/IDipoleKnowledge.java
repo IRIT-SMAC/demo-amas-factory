@@ -4,50 +4,34 @@ import fr.irit.smac.amasfactory.agent.IKnowledge;
 
 public interface IDipoleKnowledge extends IKnowledge {
 
-	public enum Terminal {
-		FIRST, SECOND
-	}
+    public enum Terminal {
 
-	/**
-	 * @param terminal
-	 * @return the terminal id
-	 */
-	public String getId(Terminal terminal);
+        FIRST("firstTerminal"), SECOND("secondTerminal");
 
-	/**
-	 * @param id
-	 * @return the terminal, null if no terminal is identified by the id.
-	 */
-	public Terminal getTerminal(String id);
+        String name;
 
-	/**
-	 * @return the tension
-	 */
-	public Double getU();
+        private Terminal(String name) {
+            this.name = name;
+        }
+        
+        public String getName() {
+            return this.name;
+        }
+    }
 
-	/**
-	 * @return the resistor
-	 */
-	public Double getR();
+    /**
+     * @return the tension
+     */
+    public Double getU();
 
-	/**
-	 * @return the intensity
-	 */
-	public Double getI();
+    /**
+     * @return the resistor
+     */
+    public Double getR();
 
-	/**
-	 * Get the potential of a terminal
-	 * 
-	 * @param terminal
-	 * @param potential
-	 */
-	public Double getV(Terminal terminal);
+    /**
+     * @return the intensity
+     */
+    public Double getI();
 
-	/**
-	 * Set the potential of a terminal
-	 * 
-	 * @param terminal
-	 * @param potential
-	 */
-	public void setTerminalV(Terminal terminal, Double potential);
 }

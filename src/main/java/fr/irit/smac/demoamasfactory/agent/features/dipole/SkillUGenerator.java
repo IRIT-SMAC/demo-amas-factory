@@ -1,5 +1,6 @@
 package fr.irit.smac.demoamasfactory.agent.features.dipole;
 
+import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.Message;
 import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
@@ -14,43 +15,48 @@ public class SkillUGenerator<F extends KnowledgeUGenerator> extends SkillDipole<
     public void publishValues(SkillPlot<KnowledgePlot> skillPlot, String id) {
 
         skillPlot.publish("tension", knowledge.getU(), id);
-        if (knowledge.getV(Terminal.FIRST) != null) {
+        if (knowledge.getFirstPotential() != null) {
             skillPlot.publish("firstPotential",
-                knowledge.getV(Terminal.FIRST), id);
+                knowledge.getFirstPotential(), id);
         }
-        if (knowledge.getV(Terminal.SECOND) != null) {
+        if (knowledge.getSecondPotential() != null) {
             skillPlot.publish("secondPotential",
-                knowledge.getV(Terminal.SECOND), id);
+                knowledge.getSecondPotential(), id);
         }
     }
 
-    public void compareVoltageWithGeneratorTension(IMsgBox<IMessage> msgBox, String id) {
+    public void compareVoltageWithGeneratorTension(KnowledgeSocial knowledgeSocial, String id) {
 
         // compare actual voltage with generator tension
-        Double actualVoltage = knowledge.getV(Terminal.SECOND)
-            - knowledge.getV(Terminal.FIRST);
+        Double actualVoltage = knowledge.getSecondPotential()
+            - knowledge.getFirstPotential();
         Double error = knowledge.getU() - actualVoltage;
         if (error > 0) {
             // ask to increase the actualVoltage
-            requestUChange(Terminal.FIRST, Terminal.SECOND, id, msgBox);
+            requestUChange(knowledge.getFirstPotential(), knowledge.getSecondPotential(), id,
+                knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()).getId(),
+                knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()).getId(), knowledgeSocial.getMsgBox());
         }
         else if (error < 0) {
             // ask to decrease the actualVoltage
-            requestUChange(Terminal.SECOND, Terminal.FIRST, id, msgBox);
+            requestUChange(knowledge.getSecondPotential(), knowledge.getFirstPotential(), id,
+                knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()).getId(),
+                knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()).getId(), knowledgeSocial.getMsgBox());
         }
     }
 
-    private void requestUChange(Terminal lowerReceiver, Terminal greaterReceiver, String id, IMsgBox<IMessage> msgBox) {
+    private void requestUChange(Double lowerReceiver, Double greaterReceiver, String id, String idLowerReceiver,
+        String idGreaterReceiver, IMsgBox<IMessage> msgBox) {
 
         Message greaterMsg = new PotentialDirectionRequest(id,
-            EFeedback.GREATER, 100d, knowledge.getV(greaterReceiver));
+            EFeedback.GREATER, 100d, greaterReceiver);
         Message lowerMsg = new PotentialDirectionRequest(id,
-            EFeedback.LOWER, 100d, knowledge.getV(lowerReceiver));
+            EFeedback.LOWER, 100d, lowerReceiver);
         msgBox.send(greaterMsg,
-            knowledge.getId(greaterReceiver));
-        msgBox.send(lowerMsg, knowledge.getId(lowerReceiver));
-//        logger.debug(
-//            "Sent msg: UP: " + knowledge.getId(greaterReceiver)
-//                + "  DOWN: " + knowledge.getId(lowerReceiver));
+            idGreaterReceiver);
+        msgBox.send(lowerMsg, idLowerReceiver);
+        // logger.debug(
+        // "Sent msg: UP: " + knowledge.getId(greaterReceiver)
+        // + " DOWN: " + knowledge.getId(lowerReceiver));
     }
 }

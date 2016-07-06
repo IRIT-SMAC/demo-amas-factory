@@ -8,7 +8,7 @@ import fr.irit.smac.libs.tooling.avt.EFeedback;
 public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
 
     public void publishValue(SkillPlot<KnowledgePlot> skillPlot, String id) {
-        
+
         skillPlot.publish("potential",
             this.knowledge.potential.getValue(), id);
         // logger.debug("potential: " +
@@ -23,16 +23,18 @@ public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
             skillPlot.publish("R3", this.knowledge.intensities.get("R3"), id);
         }
     }
-    
+
     public void applyKirchhoffLaw() {
-        
+
         Double intensitiesSum = 0d;
         for (Double intensity : this.knowledge.intensities.values()) {
             intensitiesSum += intensity;
         }
         if (!this.knowledge.isReceivedPdr() && intensitiesSum != 0) {
-            if (this.knowledge.potentialDirection == null && !this.knowledge.getPreviousISumChange().equals(intensitiesSum)) {
-//                logger.debug("Isum: " + intensitiesSum + " previousChange: " + previousISumChange);
+            if (this.knowledge.potentialDirection == null
+                && !this.knowledge.getPreviousISumChange().equals(intensitiesSum)) {
+                // logger.debug("Isum: " + intensitiesSum + " previousChange: "
+                // + previousISumChange);
                 this.knowledge.setPreviousISumChange(intensitiesSum);
                 if (intensitiesSum > 0) {
                     this.knowledge.potential.adjustValue(EFeedback.GREATER);
@@ -53,9 +55,9 @@ public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
             this.knowledge.potential.adjustValue(this.knowledge.potentialDirection);
         }
     }
-    
+
     public void cleanKnowledge() {
-        
+
         this.knowledge.potentialDirection = null;
         this.knowledge.worstPotentialCriticality = 0d;
         this.knowledge.setReceivedPdr(true);

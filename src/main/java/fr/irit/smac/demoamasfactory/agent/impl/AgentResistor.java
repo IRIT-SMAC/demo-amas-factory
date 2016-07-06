@@ -1,6 +1,7 @@
 package fr.irit.smac.demoamasfactory.agent.impl;
 
 import fr.irit.smac.amasfactory.agent.features.impl.Feature;
+import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.impl.Agent;
 import fr.irit.smac.amasfactory.message.EMessageType;
 import fr.irit.smac.amasfactory.message.IMessage;
@@ -14,8 +15,8 @@ import fr.irit.smac.demoamasfactory.knowledge.IDipoleKnowledge.Terminal;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
-public class AgentResistor<F extends MyFeatures, P extends Feature<K, S>, K extends KnowledgeResistor, S extends SkillResistor<K>>
-    extends Agent<F, P, K, S>implements ITwoStepsAgent {
+public class AgentResistor<F extends MyFeatures, K extends KnowledgeResistor, S extends SkillResistor<K>, P extends Feature<K, S>>
+    extends Agent<F, K, S, P>implements ITwoStepsAgent {
 
     public AgentResistor() {
     }
@@ -23,36 +24,32 @@ public class AgentResistor<F extends MyFeatures, P extends Feature<K, S>, K exte
     @Override
     public void perceive() {
 
-        this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox().getMsgs()
-            .forEach(m -> this.primaryFeature.getSkill().processMsg(m));
+        this.getPrimaryFeature().getSkill().processMsg(this.commonFeatures.getFeatureSocial().getKnowledge());
+
+        // this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox().getMsgs()
+        // .forEach(m -> this.primaryFeature.getSkill().processMsg(m));
     }
 
     @Override
     public void decideAndAct() {
-        // if (knowledge != null) {
-        // monitor values
-        IMsgBox<IMessage> msgBox = this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox();
+        
         SkillPlot<KnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
-
-        KnowledgeResistor knowledge = this.primaryFeature.getKnowledge();
 
         this.primaryFeature.getSkill().publishValues(skillPlot, id);
 
         // send message to terminals (in order to be added in their
         // neighborhood)
 
-        if (knowledge.getV(Terminal.FIRST) == null) {
-            Message msg = new Message(EMessageType.SIMPLE, id);
-            msgBox.send(msg, knowledge.getId(Terminal.FIRST));
-        }
-        if (knowledge.getV(Terminal.SECOND) == null) {
-            Message msg = new Message(EMessageType.SIMPLE, id);
-            msgBox.send(msg, knowledge.getId(Terminal.SECOND));
+        if (this.primaryFeature.getKnowledge().getFirstPotential() == null
+            || this.primaryFeature.getKnowledge().getSecondPotential() == null) {
+            this.commonFeatures.getFeatureSocial().getSkill()
+                .sendPort(this.commonFeatures.getFeatureBasic().getKnowledge().getId());
         }
 
-        this.primaryFeature.getSkill().communicateIntensity(msgBox, id);
-        this.primaryFeature.getSkill().requetPotentialUpdate(msgBox, id);
+        KnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
+        this.primaryFeature.getSkill().communicateIntensity(knowledgeSocial, id);
+        this.primaryFeature.getSkill().requetPotentialUpdate(knowledgeSocial, id);
     }
 }
