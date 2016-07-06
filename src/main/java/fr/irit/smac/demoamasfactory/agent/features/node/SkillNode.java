@@ -1,14 +1,11 @@
 package fr.irit.smac.demoamasfactory.agent.features.node;
 
 import fr.irit.smac.amasfactory.agent.impl.Skill;
-import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot;
-import fr.irit.smac.demoamasfactory.message.impl.PotentialMsg;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
-import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
-public class SkillNode<K extends KnowledgeNode> extends Skill<KnowledgeNode> {
+public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
 
     public void publishValue(SkillPlot<KnowledgePlot> skillPlot, String id) {
         

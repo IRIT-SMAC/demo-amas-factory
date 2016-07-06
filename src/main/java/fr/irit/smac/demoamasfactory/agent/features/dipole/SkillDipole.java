@@ -18,3 +18,4 @@ public class SkillDipole<K extends KnowledgeDipole> extends Skill<K>{
         }
     }
 }
+ 

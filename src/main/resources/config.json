@@ -20,7 +20,17 @@
 			"node1":{
 				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
 				"id":"node1",
-				"features":{
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
+					},
+					"skill":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
+					}
+					
+				},
+				"commonFeatures":{
 					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
 					"featureBasic":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
@@ -37,16 +47,6 @@
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-						}
-						
-					},
-					"featureNode":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
 						}
 						
 					},
@@ -67,7 +67,17 @@
 			"node2":{
 				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
 				"id":"node2",
-				"features":{
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
+					},
+					"skill":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
+					}
+					
+				},
+				"commonFeatures":{
 					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
 					"featureBasic":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
@@ -84,16 +94,6 @@
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-						}
-						
-					},
-					"featureNode":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
 						}
 						
 					},
@@ -114,7 +114,20 @@
 			"gen 20V":{
 				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentUGenerator",
 				"id":"gen 20V",
-				"features":{
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.KnowledgeUGenerator",
+						"firstTerminal":"node1",
+						"secondTerminal":"node2",
+						"tension":20
+					},
+					"skill":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.SkillUGenerator"
+					}
+					
+				},
+				"commonFeatures":{
 					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
 					"featureBasic":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
@@ -131,19 +144,6 @@
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-						}
-						
-					},
-					"featureUGenerator":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.KnowledgeUGenerator",
-							"tension":20.0,
-							"firstTerminal":"node1",
-							"secondTerminal":"node2"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.SkillUGenerator"
 						}
 						
 					},
