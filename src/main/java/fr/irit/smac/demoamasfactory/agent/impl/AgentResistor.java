@@ -24,7 +24,7 @@ public class AgentResistor<F extends MyFeatures, P extends Feature<K, S>, K exte
     public void perceive() {
 
         this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox().getMsgs()
-            .forEach(m -> this.commonFeatures.getFeatureResistor().getSkill().processMsg(m));
+            .forEach(m -> this.primaryFeature.getSkill().processMsg(m));
     }
 
     @Override
