@@ -5,7 +5,7 @@ import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 import fr.irit.smac.libs.tooling.plot.server.AgentPlotChart;
 
-public class SkillPlot<K extends IKnowledgePlot> extends Skill<K> implements ISkillPlot<K>{
+public class SkillPlot<K extends IKnowledgePlot> extends Skill<K>implements ISkillPlot<K> {
 
     @Override
     public void publish(String name, Double value, String agentId) {
@@ -16,5 +16,6 @@ public class SkillPlot<K extends IKnowledgePlot> extends Skill<K> implements ISk
             }
             this.knowledge.getChart().add(name, value);
         }
+
     }
 }

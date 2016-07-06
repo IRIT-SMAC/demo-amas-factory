@@ -1,5 +1,7 @@
 package fr.irit.smac.demoamasfactory.agent.impl;
 
+import org.slf4j.Logger;
+
 import fr.irit.smac.amasfactory.agent.features.impl.Feature;
 import fr.irit.smac.amasfactory.agent.features.social.impl.Target;
 import fr.irit.smac.amasfactory.agent.impl.Agent;
@@ -18,6 +20,12 @@ public class AgentNode<F extends MyFeatures, K extends IKnowledgeNode, S extends
 
     }
 
+    @Override
+    public void setLogger(Logger logger) {
+        super.setLogger(logger);
+        this.commonFeatures.getFeaturePlot().getSkill().setLogger(logger);
+    }
+    
     @Override
     public void perceive() {
 

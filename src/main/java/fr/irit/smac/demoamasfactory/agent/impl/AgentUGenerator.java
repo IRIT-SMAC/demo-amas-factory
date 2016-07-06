@@ -1,5 +1,7 @@
 package fr.irit.smac.demoamasfactory.agent.impl;
 
+import org.slf4j.Logger;
+
 import fr.irit.smac.amasfactory.agent.features.impl.Feature;
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
@@ -19,6 +21,12 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
     public AgentUGenerator() {
     }
 
+    @Override
+    public void setLogger(Logger logger) {
+        super.setLogger(logger);
+        this.commonFeatures.getFeaturePlot().getSkill().setLogger(logger);
+    }
+    
     @Override
     public void perceive() {
 
