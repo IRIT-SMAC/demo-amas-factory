@@ -1,16 +1,16 @@
 package fr.irit.smac.demoamasfactory.agent.impl;
 
 import fr.irit.smac.amasfactory.agent.features.impl.Feature;
-import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
-import fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.impl.Agent;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.demoamasfactory.agent.features.MyFeatures;
-import fr.irit.smac.demoamasfactory.agent.features.dipole.KnowledgeUGenerator;
-import fr.irit.smac.demoamasfactory.agent.features.dipole.SkillUGenerator;
-import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
-import fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot;
-import fr.irit.smac.demoamasfactory.knowledge.IDipoleKnowledge.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator;
+import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
+import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator, S extends SkillUGenerator<K>, P extends Feature<K, S>>
@@ -22,7 +22,7 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
     @Override
     public void perceive() {
 
-        KnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
+        IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
         knowledgeSocial.getMsgBox().getMsgs()
             .forEach(m -> this.primaryFeature.getSkill().processMsg(m, knowledgeSocial));
     }
@@ -42,15 +42,15 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
             }
         });
         
-        SkillPlot<KnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
+        ISkillPlot<IKnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
 
         this.primaryFeature.getSkill().publishValues(skillPlot, id);
         // logger.debug(knowledge.toString());
 
-        SkillSocial<KnowledgeSocial> skillSocial = this.commonFeatures.getFeatureSocial().getSkill();
-        KnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
+        ISkillSocial<IKnowledgeSocial> skillSocial = this.commonFeatures.getFeatureSocial().getSkill();
+        IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
         skillSocial.updatePortFromMessage();
 
         if (this.primaryFeature.getKnowledge().getFirstPotential() == null

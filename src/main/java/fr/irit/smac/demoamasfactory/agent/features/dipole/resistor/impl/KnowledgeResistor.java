@@ -1,11 +1,13 @@
-package fr.irit.smac.demoamasfactory.agent.features.dipole;
+package fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl;
 
 import java.util.Collection;
 
+import fr.irit.smac.demoamasfactory.agent.features.dipole.impl.KnowledgeDipole;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeResistor;
 import fr.irit.smac.demoamasfactory.message.impl.IntensityDirectionRequest;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
 
-public class KnowledgeResistor extends KnowledgeDipole {
+public class KnowledgeResistor extends KnowledgeDipole implements IKnowledgeResistor{
 
     private static final long serialVersionUID = 1L;
 
@@ -18,22 +20,27 @@ public class KnowledgeResistor extends KnowledgeDipole {
     public KnowledgeResistor() {
     }
 
+    @Override
     public Double getWorstIntensityCriticality() {
         return worstIntensityCriticality;
     }
 
+    @Override
     public void setWorstIntensityCriticality(Double worstIntensityCriticality) {
         this.worstIntensityCriticality = worstIntensityCriticality;
     }
 
+    @Override
     public void setIntensityDirection(EFeedback intensityDirection) {
         this.intensityDirection = intensityDirection;
     }
 
+    @Override
     public EFeedback getIntensityDirection() {
         return intensityDirection;
     }
 
+    @Override
     public Collection<IntensityDirectionRequest> getIntensityDirectionRequest() {
         return intensityDirectionRequest;
     }

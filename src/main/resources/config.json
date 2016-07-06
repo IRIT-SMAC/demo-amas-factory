@@ -23,10 +23,10 @@
 				"primaryFeature":{
 					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
 					},
 					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
 					}
 					
 				},
@@ -66,10 +66,10 @@
 					"featurePlot":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
 						},
 						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
 						}
 						
 					}
@@ -83,10 +83,10 @@
 				"primaryFeature":{
 					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode"
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
 					},
 					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.SkillNode"
+						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
 					}
 					
 				},
@@ -126,10 +126,10 @@
 					"featurePlot":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
 						},
 						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
 						}
 						
 					}
@@ -143,11 +143,11 @@
 				"primaryFeature":{
 					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.KnowledgeUGenerator",
+						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator",
 						"tension":20
 					},
 					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.SkillUGenerator"
+						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator"
 					}
 					
 				},
@@ -207,10 +207,10 @@
 					"featurePlot":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
 						},
 						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
 						}
 						
 					}

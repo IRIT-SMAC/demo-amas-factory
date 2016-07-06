@@ -1,10 +1,13 @@
-package fr.irit.smac.demoamasfactory.agent.features.dipole;
+package fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl;
 
-import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.message.IMessage;
-import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
-import fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot;
-import fr.irit.smac.demoamasfactory.knowledge.IDipoleKnowledge.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.impl.SkillDipole;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeResistor;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.ISkillResistor;
+import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
+import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 import fr.irit.smac.demoamasfactory.message.impl.DirectionRequest;
 import fr.irit.smac.demoamasfactory.message.impl.IntensityDirectionRequest;
 import fr.irit.smac.demoamasfactory.message.impl.IntensityMsg;
@@ -12,10 +15,10 @@ import fr.irit.smac.demoamasfactory.message.impl.PotentialDirectionRequest;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
-public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
+public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>implements ISkillResistor<K> {
 
     @Override
-    public void processMsg(IMessage message, KnowledgeSocial knowledgeSocial) {
+    public void processMsg(IMessage message, IKnowledgeSocial knowledgeSocial) {
         super.processMsg(message, knowledgeSocial);
 
         if (message instanceof IntensityDirectionRequest) {
@@ -23,7 +26,8 @@ public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
         }
     }
 
-    public void publishValues(SkillPlot<KnowledgePlot> skillPlot, String id) {
+    @Override
+    public void publishValues(ISkillPlot<IKnowledgePlot> skillPlot, String id) {
 
         if (knowledge.getR() != null) {
             skillPlot.publish("resistor", knowledge.getR(), id);
@@ -37,7 +41,8 @@ public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
         logger.debug(knowledge.toString());
     }
 
-    public void communicateIntensity(KnowledgeSocial knowledgeSocial, String id) {
+    @Override
+    public void communicateIntensity(IKnowledgeSocial knowledgeSocial, String id) {
 
         IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
         final Double intensity = knowledge.getI();
@@ -49,7 +54,8 @@ public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
         }
     }
 
-    public void requetPotentialUpdate(KnowledgeSocial knowledgeSocial, String id) {
+    @Override
+    public void requetPotentialUpdate(IKnowledgeSocial knowledgeSocial, String id) {
 
         IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
         EFeedback intensityDirection = knowledge.getIntensityDirection();

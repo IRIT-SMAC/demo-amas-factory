@@ -1,14 +1,17 @@
-package fr.irit.smac.demoamasfactory.agent.features.dipole;
+package fr.irit.smac.demoamasfactory.agent.features.dipole.impl;
 
-import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.ISkillDipole;
 
-public class SkillDipole<K extends KnowledgeDipole> extends Skill<K> {
+public class SkillDipole<K extends IKnowledgeDipole> extends Skill<K> implements ISkillDipole<K>{
 
-    public void processMsg(IMessage m, KnowledgeSocial knowledgeSocial) {
+    @Override
+    public void processMsg(IMessage m, IKnowledgeSocial knowledgeSocial) {
 
         if (m instanceof ValuePortMessage) {
             knowledgeSocial.getValuePortMessageCollection().add((ValuePortMessage) m);

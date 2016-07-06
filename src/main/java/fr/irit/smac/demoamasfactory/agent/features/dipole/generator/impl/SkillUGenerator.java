@@ -1,18 +1,22 @@
-package fr.irit.smac.demoamasfactory.agent.features.dipole;
+package fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl;
 
-import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.Message;
-import fr.irit.smac.demoamasfactory.agent.features.plot.KnowledgePlot;
-import fr.irit.smac.demoamasfactory.agent.features.plot.SkillPlot;
-import fr.irit.smac.demoamasfactory.knowledge.IDipoleKnowledge.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.IKnowledgeUGenerator;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.ISkillUGenerator;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.impl.SkillDipole;
+import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
+import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 import fr.irit.smac.demoamasfactory.message.impl.PotentialDirectionRequest;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
-public class SkillUGenerator<F extends KnowledgeUGenerator> extends SkillDipole<F> {
+public class SkillUGenerator<K extends IKnowledgeUGenerator> extends SkillDipole<K>implements ISkillUGenerator<K> {
 
-    public void publishValues(SkillPlot<KnowledgePlot> skillPlot, String id) {
+    @Override
+    public void publishValues(ISkillPlot<IKnowledgePlot> skillPlot, String id) {
 
         skillPlot.publish("tension", knowledge.getU(), id);
         if (knowledge.getFirstPotential() != null) {
@@ -25,7 +29,8 @@ public class SkillUGenerator<F extends KnowledgeUGenerator> extends SkillDipole<
         }
     }
 
-    public void compareVoltageWithGeneratorTension(KnowledgeSocial knowledgeSocial, String id) {
+    @Override
+    public void compareVoltageWithGeneratorTension(IKnowledgeSocial knowledgeSocial, String id) {
 
         // compare actual voltage with generator tension
         Double actualVoltage = knowledge.getSecondPotential()

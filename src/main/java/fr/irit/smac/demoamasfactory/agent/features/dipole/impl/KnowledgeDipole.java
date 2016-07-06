@@ -1,11 +1,11 @@
-package fr.irit.smac.demoamasfactory.agent.features.dipole;
+package fr.irit.smac.demoamasfactory.agent.features.dipole.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.impl.Knowledge;
-import fr.irit.smac.demoamasfactory.knowledge.IDipoleKnowledge;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole;
 
-public class KnowledgeDipole extends Knowledge implements IDipoleKnowledge {
+public class KnowledgeDipole extends Knowledge implements IKnowledgeDipole {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,23 +36,28 @@ public class KnowledgeDipole extends Knowledge implements IDipoleKnowledge {
         return intensity;
     }
 
+    @Override
     public Double getFirstPotential() {
         return firstPotential;
     }
 
+    @Override
     public Double getSecondPotential() {
         return secondPotential;
     }
 
+    @Override
     public void setFirstPotential(Double firstPotential) {
         this.firstPotential = firstPotential;
     }
 
+    @Override
     public void setSecondPotential(Double secondPotential) {
         this.secondPotential = secondPotential;
     }
 
-    protected void computeUfromV() {
+    @Override
+    public void computeUfromV() {
         if (firstPotential != null && secondPotential != null) {
             Double old = tension;
             tension = secondPotential - firstPotential;
@@ -62,7 +67,8 @@ public class KnowledgeDipole extends Knowledge implements IDipoleKnowledge {
         }
     }
 
-    protected void computeIfromU() {
+    @Override
+    public void computeIfromU() {
         if (tension != null && resistor != null && !resistor.equals(0d)) {
             intensity = tension / resistor;
         }

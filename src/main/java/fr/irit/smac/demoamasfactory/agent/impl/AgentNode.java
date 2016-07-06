@@ -5,12 +5,12 @@ import fr.irit.smac.amasfactory.agent.features.social.impl.Target;
 import fr.irit.smac.amasfactory.agent.impl.Agent;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.demoamasfactory.agent.features.MyFeatures;
-import fr.irit.smac.demoamasfactory.agent.features.node.KnowledgeNode;
-import fr.irit.smac.demoamasfactory.agent.features.node.SkillNode;
+import fr.irit.smac.demoamasfactory.agent.features.node.IKnowledgeNode;
+import fr.irit.smac.demoamasfactory.agent.features.node.ISkillNode;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
-public class AgentNode<F extends MyFeatures, K extends KnowledgeNode, S extends SkillNode<K>, P extends Feature<K, S>>
+public class AgentNode<F extends MyFeatures, K extends IKnowledgeNode, S extends ISkillNode<K>, P extends Feature<K, S>>
     extends Agent<F, K, S, P>
     implements ITwoStepsAgent {
 
@@ -38,27 +38,27 @@ public class AgentNode<F extends MyFeatures, K extends KnowledgeNode, S extends 
             this.commonFeatures.getFeatureSocial().getKnowledge().getTargetSet().add(target);
         });
 
-        KnowledgeNode knowledgeNode = this.primaryFeature.getKnowledge();
+        IKnowledgeNode knowledgeNode = this.primaryFeature.getKnowledge();
         knowledgeNode.getPotentialDirectionRequest().forEach(m -> {
             knowledgeNode.setReceivedPdr(true);
-            if (m.knownValue.equals(knowledgeNode.potential.getValue())
-                && knowledgeNode.worstPotentialCriticality < m.criticality) {
+            if (m.knownValue.equals(knowledgeNode.getPotential().getValue())
+                && knowledgeNode.getWorstPotentialCriticality() < m.criticality) {
                 // logger.debug("received " + pdr);
-                knowledgeNode.worstPotentialCriticality = m.criticality;
-                knowledgeNode.potentialDirection = m.direction;
+                knowledgeNode.setWorstPotentialCriticality(m.criticality);
+                knowledgeNode.setPotentialDirection(m.direction);
             }
         });
         
-        knowledgeNode.getIntensityMsg().forEach(m -> knowledgeNode.intensities.put(m.getSender(), m.getValue()));
+        knowledgeNode.getIntensityMsg().forEach(m -> knowledgeNode.getIntensities().put(m.getSender(), m.getValue()));
 
 
-        SkillNode<K> skill = this.primaryFeature.getSkill();
+        ISkillNode<K> skill = this.primaryFeature.getSkill();
         skill.applyKirchhoffLaw();
         skill.adjustPotential();
 
-        KnowledgeNode knowledge = this.primaryFeature
+        IKnowledgeNode knowledge = this.primaryFeature
             .getKnowledge();
-        this.commonFeatures.getFeatureSocial().getKnowledge().setOutputValue(knowledge.potential.getValue());
+        this.commonFeatures.getFeatureSocial().getKnowledge().setOutputValue(knowledge.getPotential().getValue());
         this.commonFeatures.getFeatureSocial().getSkill().sendOutputValue(this.id);
 
         skill.cleanKnowledge();
