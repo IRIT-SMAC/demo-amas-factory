@@ -55,8 +55,8 @@ public class SkillUGenerator<F extends KnowledgeUGenerator> extends SkillDipole<
         msgBox.send(greaterMsg,
             idGreaterReceiver);
         msgBox.send(lowerMsg, idLowerReceiver);
-        // logger.debug(
-        // "Sent msg: UP: " + knowledge.getId(greaterReceiver)
-        // + " DOWN: " + knowledge.getId(lowerReceiver));
+        logger.debug(
+            "Sent msg: UP: " + idGreaterReceiver
+                + " DOWN: " + idLowerReceiver);
     }
 }

@@ -5,7 +5,6 @@ import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
-import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
 public class SkillDipole<K extends KnowledgeDipole> extends Skill<K> {
 

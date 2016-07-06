@@ -37,6 +37,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"node1"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},
@@ -94,6 +97,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"node2"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},
@@ -152,6 +158,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"gen 20V"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},
@@ -188,6 +197,7 @@
 								}
 								
 							]
+							
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"

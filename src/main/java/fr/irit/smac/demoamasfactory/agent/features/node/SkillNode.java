@@ -33,8 +33,8 @@ public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
 
         skillPlot.publish("potential",
             this.knowledge.potential.getValue(), id);
-        // logger.debug("potential: " +
-        // knowledgeNode.potential.getValue());
+        logger.debug("potential: " +
+            this.knowledge.potential.getValue());
         if (this.knowledge.intensities.get("R1") != null) {
             skillPlot.publish("R1", this.knowledge.intensities.get("R1"), id);
         }
@@ -55,8 +55,8 @@ public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
         if (!this.knowledge.isReceivedPdr() && intensitiesSum != 0) {
             if (this.knowledge.potentialDirection == null
                 && !this.knowledge.getPreviousISumChange().equals(intensitiesSum)) {
-                // logger.debug("Isum: " + intensitiesSum + " previousChange: "
-                // + previousISumChange);
+                logger.debug("Isum: " + intensitiesSum + " previousChange: "
+                    + this.knowledge.getPreviousISumChange());
                 this.knowledge.setPreviousISumChange(intensitiesSum);
                 if (intensitiesSum > 0) {
                     this.knowledge.potential.adjustValue(EFeedback.GREATER);
@@ -70,10 +70,8 @@ public class SkillNode<K extends KnowledgeNode> extends Skill<K> {
 
     public void adjustPotential() {
         if (this.knowledge.potentialDirection != null) {
-            // logger.debug(
-            // "potential=" + this.knowledge.potential.getValue() + " adjust it
-            // " +
-            // knowledgeNode.potentialDirection);
+            logger.debug(
+                "potential=" + this.knowledge.potential.getValue() + " adjust it " + this.knowledge.potentialDirection);
             this.knowledge.potential.adjustValue(this.knowledge.potentialDirection);
         }
     }

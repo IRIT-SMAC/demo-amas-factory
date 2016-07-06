@@ -34,7 +34,7 @@ public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
         if (knowledge.getU() != null) {
             skillPlot.publish("tension", knowledge.getU(), id);
         }
-        // logger.debug(knowledge.toString());
+        logger.debug(knowledge.toString());
     }
 
     public void communicateIntensity(KnowledgeSocial knowledgeSocial, String id) {
@@ -59,14 +59,15 @@ public class SkillResistor<K extends KnowledgeResistor> extends SkillDipole<K> {
                 DirectionRequest.opposite(intensityDirection), worstIntensityCriticality,
                 knowledge.getFirstPotential());
             msgBox.send(firstMsg, knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()).getId());
-            // logger.debug("send V" +
-            // DirectionRequest.opposite(intensityDirection) + " to "
-            // + knowledge.getId(Terminal.FIRST));
+            logger.debug("send V" +
+                DirectionRequest.opposite(intensityDirection) + " to "
+                + knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()));
             PotentialDirectionRequest secondMsg = new PotentialDirectionRequest(id,
                 intensityDirection, worstIntensityCriticality, knowledge.getSecondPotential());
             msgBox.send(secondMsg, knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()).getId());
-            // logger.debug("send V" + intensityDirection + " to " +
-            // knowledge.getId(Terminal.SECOND));
+            logger.debug("send V" + intensityDirection + " to " +
+                knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()));
+
             // clear request
             worstIntensityCriticality = 0d;
             intensityDirection = null;
