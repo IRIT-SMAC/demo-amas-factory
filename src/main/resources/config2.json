@@ -1,519 +1,523 @@
 {
-	"executionService":{
-		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
-		"nbThreads":8
-	},
-	"messagingService":{
-		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
-		"messageClass":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
-	},
 	"className":"fr.irit.smac.demoamasfactory.infrastructure.impl.DemoInfrastructure",
-	"loggingService":{
-		"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
-	},
-	"hazelcastService":{
-		"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"
-	},
-	"agentHandlerService":{
-		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
-		"agentMap":{
-			"A":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
-				"id":"A",
-				"primaryFeature":{
-					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
-					},
-					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
-					}
-					
-				},
-				"commonFeatures":{
-					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
-					"featureBasic":{
+	"services":{
+		"className":"fr.irit.smac.demoamasfactory.service.impl.MyServices",
+		"executionService":{
+			"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
+			"nbThreads":8
+		},
+		"messagingService":{
+			"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
+			"messageClass":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
+		},
+		"loggingService":{
+			"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
+		},
+		"hazelcastService":{
+			"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"
+		},
+		"agentHandlerService":{
+			"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
+			"agentMap":{
+				"A":{
+					"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
+					"id":"A",
+					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-							"id":"A"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
 						},
 						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
 						}
 						
 					},
-					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.Double",
-							"portMap":{
-								"port":{
-									"id":"port",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								}
-								
+					"commonFeatures":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+						"featureBasic":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"A"
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 							}
 							
 						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-						}
-						
-					},
-					"featurePlot":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
-						}
-						
-					}
-					
-				}
-				
-			},
-			"B":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
-				"id":"B",
-				"primaryFeature":{
-					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
-					},
-					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
-					}
-					
-				},
-				"commonFeatures":{
-					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
-					"featureBasic":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-							"id":"B"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
-						}
-						
-					},
-					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.Double",
-							"portMap":{
-								"port":{
-									"id":"port",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+						"featureSocial":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"outputType":"java.lang.Double",
+								"portMap":{
+									"port":{
+										"id":"port",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									}
+									
 								}
 								
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
 							}
 							
 						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+						"featurePlot":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							},
+							"skill":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							}
+							
 						}
 						
-					},
-					"featurePlot":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
-						}
-						
-					}
-					
-				}
-				
-			},
-			"C":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
-				"id":"C",
-				"primaryFeature":{
-					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
-					},
-					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
 					}
 					
 				},
-				"commonFeatures":{
-					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
-					"featureBasic":{
+				"B":{
+					"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
+					"id":"B",
+					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-							"id":"C"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
 						},
 						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
 						}
 						
 					},
-					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.Double",
-							"portMap":{
-								"port":{
-									"id":"port",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								}
-								
+					"commonFeatures":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+						"featureBasic":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"B"
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 							}
 							
 						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-						}
-						
-					},
-					"featurePlot":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
-						}
-						
-					}
-					
-				}
-				
-			},
-			"gen 20V":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentUGenerator",
-				"id":"gen 20V",
-				"primaryFeature":{
-					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator",
-						"tension":20.0
-					},
-					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator"
-					}
-					
-				},
-				"commonFeatures":{
-					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
-					"featureBasic":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-							"id":"gen 20V"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
-						}
-						
-					},
-					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.Double",
-							"portMap":{
-								"firstTerminal":{
-									"id":"A",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								},
-								"secondTerminal":{
-									"id":"C",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+						"featureSocial":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"outputType":"java.lang.Double",
+								"portMap":{
+									"port":{
+										"id":"port",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									}
+									
 								}
 								
 							},
-							"targetSet":[
-								{
-									"agentTarget":"A",
-									"portTarget":"port",
-									"portSource":"firstTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								},
-								{
-									"agentTarget":"C",
-									"portTarget":"port",
-									"portSource":"secondTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								}
-								
-							]
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							}
 							
 						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+						"featurePlot":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							},
+							"skill":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							}
+							
 						}
 						
-					},
-					"featurePlot":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
-						}
-						
-					}
-					
-				}
-				
-			},
-			"res1":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentResistor",
-				"id":"res1",
-				"primaryFeature":{
-					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.KnowledgeResistor",
-						"resistor":5.0
-					},
-					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.SkillResistor"
 					}
 					
 				},
-				"commonFeatures":{
-					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
-					"featureBasic":{
+				"C":{
+					"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentNode",
+					"id":"C",
+					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-							"id":"res1"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode"
 						},
 						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode"
 						}
 						
 					},
-					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.Double",
-							"portMap":{
-								"firstTerminal":{
-									"id":"B",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								},
-								"secondTerminal":{
-									"id":"C",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+					"commonFeatures":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+						"featureBasic":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"C"
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							}
+							
+						},
+						"featureSocial":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"outputType":"java.lang.Double",
+								"portMap":{
+									"port":{
+										"id":"port",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									}
+									
 								}
 								
 							},
-							"targetSet":[
-								{
-									"agentTarget":"B",
-									"portTarget":"port",
-									"portSource":"firstTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								},
-								{
-									"agentTarget":"C",
-									"portTarget":"port",
-									"portSource":"secondTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								}
-								
-							]
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							}
 							
 						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+						"featurePlot":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							},
+							"skill":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							}
+							
 						}
 						
-					},
-					"featurePlot":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
-						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
-						}
-						
-					}
-					
-				}
-				
-			},
-			"res2":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentResistor",
-				"id":"res2",
-				"primaryFeature":{
-					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.KnowledgeResistor",
-						"resistor":5.0
-					},
-					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.SkillResistor"
 					}
 					
 				},
-				"commonFeatures":{
-					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
-					"featureBasic":{
+				"gen 20V":{
+					"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentUGenerator",
+					"id":"gen 20V",
+					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-							"id":"res2"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator",
+							"tension":20.0
 						},
 						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator"
 						}
 						
 					},
-					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.String",
-							"portMap":{
-								"firstTerminal":{
-									"id":"B",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								},
-								"secondTerminal":{
-									"id":"C",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								}
-								
+					"commonFeatures":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+						"featureBasic":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"gen 20V"
 							},
-							"targetSet":[
-								{
-									"agentTarget":"B",
-									"portTarget":"port",
-									"portSource":"firstTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								},
-								{
-									"agentTarget":"C",
-									"portTarget":"port",
-									"portSource":"secondTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								}
-								
-							]
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							}
 							
 						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-						}
-						
-					},
-					"featurePlot":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+						"featureSocial":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"outputType":"java.lang.Double",
+								"portMap":{
+									"firstTerminal":{
+										"id":"A",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									},
+									"secondTerminal":{
+										"id":"C",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									}
+									
+								},
+								"targetSet":[
+									{
+										"agentTarget":"A",
+										"portTarget":"port",
+										"portSource":"firstTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									},
+									{
+										"agentTarget":"C",
+										"portTarget":"port",
+										"portSource":"secondTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									}
+									
+								]
+								
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							}
+							
 						},
-						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+						"featurePlot":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							},
+							"skill":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							}
+							
 						}
 						
-					}
-					
-				}
-				
-			},
-			"res3":{
-				"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentResistor",
-				"id":"res3",
-				"primaryFeature":{
-					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-					"knowledge":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.KnowledgeResistor",
-						"resistor":5.0
-					},
-					"skill":{
-						"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.SkillResistor"
 					}
 					
 				},
-				"commonFeatures":{
-					"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
-					"featureBasic":{
+				"res1":{
+					"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentResistor",
+					"id":"res1",
+					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-							"id":"res3"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.KnowledgeResistor",
+							"resistor":5.0
 						},
 						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.SkillResistor"
 						}
 						
 					},
-					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.Double",
-							"portMap":{
-								"firstTerminal":{
-									"id":"A",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								},
-								"secondTerminal":{
-									"id":"B",
-									"type":"java.lang.Double",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
-								}
-								
+					"commonFeatures":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+						"featureBasic":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"res1"
 							},
-							"targetSet":[
-								{
-									"agentTarget":"A",
-									"portTarget":"port",
-									"portSource":"firstTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								},
-								{
-									"agentTarget":"B",
-									"portTarget":"port",
-									"portSource":"secondTerminal",
-									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
-								}
-								
-							]
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							}
 							
 						},
+						"featureSocial":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"outputType":"java.lang.Double",
+								"portMap":{
+									"firstTerminal":{
+										"id":"B",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									},
+									"secondTerminal":{
+										"id":"C",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									}
+									
+								},
+								"targetSet":[
+									{
+										"agentTarget":"B",
+										"portTarget":"port",
+										"portSource":"firstTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									},
+									{
+										"agentTarget":"C",
+										"portTarget":"port",
+										"portSource":"secondTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									}
+									
+								]
+								
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							}
+							
+						},
+						"featurePlot":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							},
+							"skill":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							}
+							
+						}
+						
+					}
+					
+				},
+				"res2":{
+					"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentResistor",
+					"id":"res2",
+					"primaryFeature":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.KnowledgeResistor",
+							"resistor":5.0
+						},
 						"skill":{
-							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.SkillResistor"
 						}
 						
 					},
-					"featurePlot":{
+					"commonFeatures":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+						"featureBasic":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"res2"
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							}
+							
+						},
+						"featureSocial":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"outputType":"java.lang.String",
+								"portMap":{
+									"firstTerminal":{
+										"id":"B",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									},
+									"secondTerminal":{
+										"id":"C",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									}
+									
+								},
+								"targetSet":[
+									{
+										"agentTarget":"B",
+										"portTarget":"port",
+										"portSource":"firstTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									},
+									{
+										"agentTarget":"C",
+										"portTarget":"port",
+										"portSource":"secondTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									}
+									
+								]
+								
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							}
+							
+						},
+						"featurePlot":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							},
+							"skill":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							}
+							
+						}
+						
+					}
+					
+				},
+				"res3":{
+					"className":"fr.irit.smac.demoamasfactory.agent.impl.AgentResistor",
+					"id":"res3",
+					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.KnowledgeResistor",
+							"resistor":5.0
 						},
 						"skill":{
-							"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							"className":"fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.SkillResistor"
+						}
+						
+					},
+					"commonFeatures":{
+						"className":"fr.irit.smac.demoamasfactory.agent.features.MyFeatures",
+						"featureBasic":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"res3"
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							}
+							
+						},
+						"featureSocial":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"outputType":"java.lang.Double",
+								"portMap":{
+									"firstTerminal":{
+										"id":"A",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									},
+									"secondTerminal":{
+										"id":"B",
+										"type":"java.lang.Double",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
+									}
+									
+								},
+								"targetSet":[
+									{
+										"agentTarget":"A",
+										"portTarget":"port",
+										"portSource":"firstTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									},
+									{
+										"agentTarget":"B",
+										"portTarget":"port",
+										"portSource":"secondTerminal",
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
+									}
+									
+								]
+								
+							},
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							}
+							
+						},
+						"featurePlot":{
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.KnowledgePlot"
+							},
+							"skill":{
+								"className":"fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
+							}
+							
 						}
 						
 					}
@@ -522,10 +526,10 @@
 				
 			}
 			
+		},
+		"plotService":{
+			"className":"fr.irit.smac.demoamasfactory.service.plot.impl.PlotService"
 		}
 		
-	},
-	"plotService":{
-		"className":"fr.irit.smac.demoamasfactory.service.plot.impl.PlotService"
 	}
 }

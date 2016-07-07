@@ -14,7 +14,7 @@ public class PlotService implements IPlotService {
 
     AtomicInteger  nbAgents = new AtomicInteger(0);
     AgentPlotChart nbChart  = new AgentPlotChart("# Agents");
-    
+
     @Override
     public void start() {
         // TODO Auto-generated method stub
@@ -27,19 +27,33 @@ public class PlotService implements IPlotService {
 
     }
 
-//    @Override
-//    public IAgentMonitor createAgentMonitor(String id) {
-//
-////        AgentMonitor agentMonitor = new AgentMonitor();
-////        agentMonitor.init(id, agentsFilter, valuesFilter);
-////        nbChart.add(nbAgents.incrementAndGet());
-////        return agentMonitor;
-//    }
+    public AgentPlotChart getNbChart() {
+        return nbChart;
+    }
 
-//    @Override
-//    public void setAgentsFilter(Predicate<String> agentsFilter, Map<String,IAgent> agentMap) {
-//        
-//        this.agentsFilter = agentsFilter;
-//        agentMap.forEach((s, agent) -> agent.getMonitor().setAgentsFilter(agentsFilter));
-//    }
+    @Override
+    public AgentPlotChart initChart(String id) {
+
+        AgentPlotChart chart = new AgentPlotChart(id);
+        this.nbChart.add(this.nbAgents.incrementAndGet());
+        return chart;
+    }
+
+    // @Override
+    // public IAgentMonitor createAgentMonitor(String id) {
+    //
+    //// AgentMonitor agentMonitor = new AgentMonitor();
+    //// agentMonitor.init(id, agentsFilter, valuesFilter);
+    //// nbChart.add(nbAgents.incrementAndGet());
+    //// return agentMonitor;
+    // }
+
+    // @Override
+    // public void setAgentsFilter(Predicate<String> agentsFilter,
+    // Map<String,IAgent> agentMap) {
+    //
+    // this.agentsFilter = agentsFilter;
+    // agentMap.forEach((s, agent) ->
+    // agent.getMonitor().setAgentsFilter(agentsFilter));
+    // }
 }

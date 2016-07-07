@@ -40,7 +40,6 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
         logger.debug("potential: " +
             this.knowledge.getPotential().getValue());
 
-        System.out.println(this.knowledge.getIntensities());
         this.knowledge.getIntensities().forEach((k, v) -> {
             skillPlot.publish(k, v, id);
         });

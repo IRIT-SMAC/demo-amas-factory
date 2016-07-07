@@ -24,20 +24,19 @@ public class AgentNode<F extends MyFeatures, K extends IKnowledgeNode, S extends
         super.setLogger(logger);
         this.commonFeatures.getFeaturePlot().getSkill().setLogger(logger);
     }
-
+    
     @Override
     public void perceive() {
 
         IMsgBox<IMessage> msgBox = this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox();
         msgBox.getMsgs().forEach(
             m -> this.primaryFeature.getSkill().processMsg(m, this.commonFeatures.getFeatureSocial().getKnowledge()));
-        this.commonFeatures.getFeatureSocial().getSkill().addTargetFromMessage();
-        
     }
 
     @Override
     public void decideAndAct() {
 
+        this.commonFeatures.getFeatureSocial().getSkill().addTargetFromMessage();
         ISkillNode<K> skill = this.primaryFeature.getSkill();
         skill.handlePotentialDirectionRequestMessage();
         skill.handleIntensityMessage();

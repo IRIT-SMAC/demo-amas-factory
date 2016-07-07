@@ -12,6 +12,7 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeRes
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.ISkillResistor;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
+import fr.irit.smac.demoamasfactory.service.impl.MyServices;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S extends ISkillResistor<K>, P extends Feature<K, S>>
@@ -51,16 +52,15 @@ public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S
         });
 
         this.primaryFeature.getSkill().handleIntensityDirectionRequest();
-        
+
         this.commonFeatures.getFeatureSocial().getKnowledge().getPortOfTargetMessageCollection().clear();
         this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().clear();
         this.primaryFeature.getKnowledge().getIntensityDirectionRequest().clear();
-        
+
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
 
         ISkillPlot<IKnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
         this.primaryFeature.getSkill().publishValues(skillPlot, id);
-
 
         // send message to terminals (in order to be added in their
         // neighborhood)
