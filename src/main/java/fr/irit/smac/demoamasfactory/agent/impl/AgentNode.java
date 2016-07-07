@@ -33,10 +33,14 @@ public class AgentNode<F extends MyFeatures, K extends IKnowledgeNode, S extends
             m -> this.primaryFeature.getSkill().processMsg(m, this.commonFeatures.getFeatureSocial().getKnowledge()));
         this.commonFeatures.getFeatureSocial().getSkill().addTargetFromMessage();
         
+    }
+
+    @Override
+    public void decideAndAct() {
+
         ISkillNode<K> skill = this.primaryFeature.getSkill();
         skill.handlePotentialDirectionRequestMessage();
         skill.handleIntensityMessage();
-    
         skill.publishValue(this.commonFeatures.getFeaturePlot().getSkill(),
             this.commonFeatures.getFeatureBasic().getKnowledge().getId());
         
@@ -44,12 +48,6 @@ public class AgentNode<F extends MyFeatures, K extends IKnowledgeNode, S extends
         this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().clear();
         this.primaryFeature.getKnowledge().getIntensityMsg().clear();
         this.primaryFeature.getKnowledge().getPotentialDirectionRequest().clear();
-    }
-
-    @Override
-    public void decideAndAct() {
-
-        ISkillNode<K> skill = this.primaryFeature.getSkill();
         skill.applyKirchhoffLaw();
         skill.adjustPotential();
 

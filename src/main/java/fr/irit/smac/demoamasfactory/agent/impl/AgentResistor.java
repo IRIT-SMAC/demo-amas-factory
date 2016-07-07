@@ -32,7 +32,11 @@ public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S
         IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
         knowledgeSocial.getMsgBox().getMsgs()
             .forEach(m -> this.primaryFeature.getSkill().processMsg(m, knowledgeSocial));
-    
+    }
+
+    @Override
+    public void decideAndAct() {
+
         IKnowledgeResistor knowledgeResistor = this.primaryFeature.getKnowledge();
 
         // set first and second potential
@@ -51,11 +55,7 @@ public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S
         this.commonFeatures.getFeatureSocial().getKnowledge().getPortOfTargetMessageCollection().clear();
         this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().clear();
         this.primaryFeature.getKnowledge().getIntensityDirectionRequest().clear();
-    }
-
-    @Override
-    public void decideAndAct() {
-
+        
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
 
         ISkillPlot<IKnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
