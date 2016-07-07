@@ -4,7 +4,7 @@ import fr.irit.smac.amasfactory.message.IMessageType;
 
 public enum EMyMessageType implements IMessageType {
     INTENSITY("intensity"), INTENSITY_DIRECTION_REQUEST("intensityDirectionRequest"), POTENTIAL_DIRECTION_REQUEST(
-        "potentialDirectionRequest"), POTENTIAL("potential");
+        "potentialDirectionRequest");
 
     private String name;
 

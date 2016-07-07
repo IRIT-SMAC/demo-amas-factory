@@ -14,6 +14,8 @@ public class KnowledgeDipole extends Knowledge implements IKnowledgeDipole {
     
     public Double firstPotential;
     public Double secondPotential;
+    
+    @JsonProperty
     public Double resistor;
     public Double intensity;
 
@@ -49,11 +51,13 @@ public class KnowledgeDipole extends Knowledge implements IKnowledgeDipole {
     @Override
     public void setFirstPotential(Double firstPotential) {
         this.firstPotential = firstPotential;
+        this.computeUfromV();
     }
 
     @Override
     public void setSecondPotential(Double secondPotential) {
         this.secondPotential = secondPotential;
+        this.computeUfromV();
     }
 
     @Override

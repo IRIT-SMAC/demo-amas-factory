@@ -1,5 +1,6 @@
 package fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import fr.irit.smac.demoamasfactory.agent.features.dipole.impl.KnowledgeDipole;
@@ -7,7 +8,7 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeRes
 import fr.irit.smac.demoamasfactory.message.impl.IntensityDirectionRequest;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
 
-public class KnowledgeResistor extends KnowledgeDipole implements IKnowledgeResistor{
+public class KnowledgeResistor extends KnowledgeDipole implements IKnowledgeResistor {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,6 +19,7 @@ public class KnowledgeResistor extends KnowledgeDipole implements IKnowledgeResi
     private Collection<IntensityDirectionRequest> intensityDirectionRequest;
 
     public KnowledgeResistor() {
+        this.intensityDirectionRequest = new ArrayList<>();
     }
 
     @Override

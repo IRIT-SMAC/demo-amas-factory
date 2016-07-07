@@ -47,7 +47,7 @@
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.String",
+							"outputType":"java.lang.Double",
 							"portMap":{
 								"port":{
 									"id":"port",
@@ -107,7 +107,7 @@
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-							"outputType":"java.lang.String",
+							"outputType":"java.lang.Double",
 							"portMap":{
 								"port":{
 									"id":"port",

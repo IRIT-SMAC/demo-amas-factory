@@ -3,7 +3,6 @@ package fr.irit.smac.demoamasfactory.agent.features.node.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import fr.irit.smac.amasfactory.agent.impl.Knowledge;
@@ -23,8 +22,6 @@ public class KnowledgeNode extends Knowledge implements IKnowledgeNode {
     public EFeedback potentialDirection;
 
     public IAVT potential;
-
-    public Collection<String> neighbors = new HashSet<String>();
 
     public Map<String, Double> intensities = new HashMap<String, Double>();
 
@@ -101,5 +98,10 @@ public class KnowledgeNode extends Knowledge implements IKnowledgeNode {
     @Override
     public void setPotentialDirection(EFeedback potentialDirection) {
         this.potentialDirection = potentialDirection;
+    }
+    
+    @Override
+    public void setPotential(IAVT potential) {
+        this.potential = potential;
     }
 }

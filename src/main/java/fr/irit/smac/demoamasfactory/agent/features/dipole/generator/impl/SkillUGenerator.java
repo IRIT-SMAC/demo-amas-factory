@@ -36,6 +36,7 @@ public class SkillUGenerator<K extends IKnowledgeUGenerator> extends SkillDipole
         Double actualVoltage = knowledge.getSecondPotential()
             - knowledge.getFirstPotential();
         Double error = knowledge.getU() - actualVoltage;
+        
         if (error > 0) {
             // ask to increase the actualVoltage
             requestUChange(knowledge.getFirstPotential(), knowledge.getSecondPotential(), id,

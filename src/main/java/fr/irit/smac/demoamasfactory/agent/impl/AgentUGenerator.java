@@ -26,7 +26,7 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
         super.setLogger(logger);
         this.commonFeatures.getFeaturePlot().getSkill().setLogger(logger);
     }
-    
+
     @Override
     public void perceive() {
 
@@ -39,7 +39,8 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
     public void decideAndAct() {
 
         KnowledgeUGenerator knowledgeUGenerator = this.primaryFeature.getKnowledge();
-        
+
+        // update first and second potential
         this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().forEach(m -> {
             ValuePortMessage message = (ValuePortMessage) m;
             if (message.getPort().equals(Terminal.FIRST.getName())) {
@@ -49,18 +50,22 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
                 knowledgeUGenerator.setSecondPotential((Double) message.getValue());
             }
         });
+
+        this.commonFeatures.getFeatureSocial().getKnowledge().getPortOfTargetMessageCollection().clear();
+        this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().clear();
         
-        ISkillPlot<IKnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
-
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
-
+        ISkillPlot<IKnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
         this.primaryFeature.getSkill().publishValues(skillPlot, id);
+
         // logger.debug(knowledge.toString());
 
         ISkillSocial<IKnowledgeSocial> skillSocial = this.commonFeatures.getFeatureSocial().getSkill();
         IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
         skillSocial.updatePortFromMessage();
 
+        // send message to terminals (in order to be added in their
+        // neighborhood)
         if (this.primaryFeature.getKnowledge().getFirstPotential() == null
             || this.primaryFeature.getKnowledge().getSecondPotential() == null) {
             skillSocial.sendPort(this.commonFeatures.getFeatureBasic().getKnowledge().getId());

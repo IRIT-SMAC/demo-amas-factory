@@ -13,14 +13,14 @@ public class KnowledgePlot extends Knowledge implements IKnowledgePlot{
     Predicate<String> agentsFilter = s -> true;
     Predicate<String> valuesFilter = s -> true;
 
-    public void KnowledgePlot() {
+    public KnowledgePlot() {
 
         this.agentsFilter = (s -> "R 5_5|5_6".equals(s) || "5_5".equals(s) || "1_1".equals(s)
             || "10_10".equals(s) || "gen 20V".equals(s) || "gen 2".equals(s));
-        this.chart = new AgentPlotChart(agentId);
+//        this.chart = new AgentPlotChart("hello");
     }
 
-    public void KnowledgePlot(String id, Predicate<String> agentsFilter, Predicate<String> valuesFilter) {
+    public KnowledgePlot(String id, Predicate<String> agentsFilter, Predicate<String> valuesFilter) {
         this.agentId = id;
         this.agentsFilter = (s -> "R 5_5|5_6".equals(s) || "5_5".equals(s) || "1_1".equals(s)
             || "10_10".equals(s) || "gen 20V".equals(s) || "gen 2".equals(s));

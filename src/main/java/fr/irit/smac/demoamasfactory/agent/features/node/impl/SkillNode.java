@@ -39,15 +39,11 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
             this.knowledge.getPotential().getValue(), id);
         logger.debug("potential: " +
             this.knowledge.getPotential().getValue());
-        if (this.knowledge.getIntensities().get("R1") != null) {
-            skillPlot.publish("R1", this.knowledge.getIntensities().get("R1"), id);
-        }
-        if (this.knowledge.getIntensities().get("R2") != null) {
-            skillPlot.publish("R2", this.knowledge.getIntensities().get("R2"), id);
-        }
-        if (this.knowledge.getIntensities().get("R3") != null) {
-            skillPlot.publish("R3", this.knowledge.getIntensities().get("R3"), id);
-        }
+
+        System.out.println(this.knowledge.getIntensities());
+        this.knowledge.getIntensities().forEach((k, v) -> {
+            skillPlot.publish(k, v, id);
+        });
     }
 
     @Override
@@ -57,6 +53,7 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
         for (Double intensity : this.knowledge.getIntensities().values()) {
             intensitiesSum += intensity;
         }
+
         if (!this.knowledge.isReceivedPdr() && intensitiesSum != 0) {
             if (this.knowledge.getPotentialDirection() == null
                 && !this.knowledge.getPreviousISumChange().equals(intensitiesSum)) {
@@ -71,13 +68,18 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
                 }
             }
         }
+        
+        
     }
 
     @Override
     public void adjustPotential() {
+        
         if (this.knowledge.getPotentialDirection() != null) {
+            
             logger.debug(
-                "potential=" + this.knowledge.getPotential().getValue() + " adjust it " + this.knowledge.getPotentialDirection());
+                "potential=" + this.knowledge.getPotential().getValue() + " adjust it "
+                    + this.knowledge.getPotentialDirection());
             this.knowledge.getPotential().adjustValue(this.knowledge.getPotentialDirection());
         }
     }
@@ -87,7 +89,27 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
 
         this.knowledge.setPotentialDirection(null);
         this.knowledge.setWorstPotentialCriticality(0d);
-        this.knowledge.setReceivedPdr(true);
+        this.knowledge.setReceivedPdr(false);
+    }
+
+    @Override
+    public void handlePotentialDirectionRequestMessage() {
+
+        this.knowledge.getPotentialDirectionRequest().forEach(m -> {
+            this.knowledge.setReceivedPdr(true);
+            if (m.knownValue.equals(this.knowledge.getPotential().getValue())
+                && this.knowledge.getWorstPotentialCriticality() < m.criticality) {
+                // logger.debug("received " + pdr);
+                this.knowledge.setWorstPotentialCriticality(m.criticality);
+                this.knowledge.setPotentialDirection(m.direction);
+            }
+        });
+    }
+
+    @Override
+    public void handleIntensityMessage() {
+        
+        this.knowledge.getIntensityMsg().forEach(m -> this.knowledge.getIntensities().put(m.getSender(), m.getValue()));
 
     }
 }

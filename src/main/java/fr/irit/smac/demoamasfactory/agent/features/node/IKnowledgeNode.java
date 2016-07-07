@@ -35,4 +35,6 @@ public interface IKnowledgeNode extends IKnowledge {
 
     public void setPotentialDirection(EFeedback potentialDirection);
 
+    public void setPotential(IAVT potential);
+
 }

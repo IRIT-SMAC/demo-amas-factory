@@ -8,6 +8,10 @@ import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 
 public interface ISkillNode<K extends IKnowledgeNode> extends ISkill<K> {
 
+    public void handlePotentialDirectionRequestMessage();
+    
+    public void handleIntensityMessage();
+    
     public void applyKirchhoffLaw();
 
     public void processMsg(IMessage message, IKnowledgeSocial knowledgeSocial);

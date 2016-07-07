@@ -11,5 +11,7 @@ public interface ISkillResistor<K extends IKnowledgeResistor> extends ISkillDipo
 
     public void communicateIntensity(IKnowledgeSocial knowledgeSocial, String id);
 
-    public void requetPotentialUpdate(IKnowledgeSocial knowledgeSocial, String id);
+    public void requestPotentialUpdate(IKnowledgeSocial knowledgeSocial, String id);
+
+    public void handleIntensityDirectionRequest();
 }
