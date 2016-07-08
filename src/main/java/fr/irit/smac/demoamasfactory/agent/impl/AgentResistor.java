@@ -7,7 +7,7 @@ import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.impl.Agent;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.demoamasfactory.agent.features.MyFeatures;
-import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeResistor;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.ISkillResistor;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
@@ -42,19 +42,16 @@ public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S
         // set first and second potential
         this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().forEach(m -> {
             ValuePortMessage message = (ValuePortMessage) m;
-            if (message.getPort().equals(Terminal.FIRST.getName())) {
+            if (message.getPort().equals(ETerminal.FIRST.getName())) {
                 knowledgeResistor.setFirstPotential((Double) message.getValue());
             }
-            else if (message.getPort().equals(Terminal.SECOND.getName())) {
+            else if (message.getPort().equals(ETerminal.SECOND.getName())) {
                 knowledgeResistor.setSecondPotential((Double) message.getValue());
             }
         });
 
-        this.primaryFeature.getSkill().handleIntensityDirectionRequest();
-
         this.commonFeatures.getFeatureSocial().getKnowledge().getPortOfTargetMessageCollection().clear();
         this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().clear();
-        this.primaryFeature.getKnowledge().getIntensityDirectionRequest().clear();
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
 
@@ -71,7 +68,7 @@ public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S
 
         IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial()
             .getKnowledge();
-        this.primaryFeature.getSkill().communicateIntensity(knowledgeSocial, id);
-        this.primaryFeature.getSkill().requestPotentialUpdate(knowledgeSocial, id);
+        this.primaryFeature.getSkill().communicateIntensity(knowledgeSocial, this.commonFeatures.getFeatureSocial().getSkill(), id);
+        this.primaryFeature.getSkill().requestPotentialUpdate(knowledgeSocial, this.commonFeatures.getFeatureSocial().getSkill(), id);
     }
 }

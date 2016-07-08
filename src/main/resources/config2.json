@@ -244,21 +244,21 @@
 									}
 									
 								},
-								"targetSet":[
-									{
+								"targetMap":{
+									"firstTerminal":{
 										"agentTarget":"A",
 										"portTarget":"port",
 										"portSource":"firstTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									},
-									{
+									"secondTerminal":{
 										"agentTarget":"C",
 										"portTarget":"port",
 										"portSource":"secondTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{
@@ -325,21 +325,21 @@
 									}
 									
 								},
-								"targetSet":[
-									{
+								"targetMap":{
+									"firstTerminal":{
 										"agentTarget":"B",
 										"portTarget":"port",
 										"portSource":"firstTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									},
-									{
+									"secondTerminal":{
 										"agentTarget":"C",
 										"portTarget":"port",
 										"portSource":"secondTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{
@@ -406,21 +406,21 @@
 									}
 									
 								},
-								"targetSet":[
-									{
+								"targetMap":{
+									"firstTerminal":{
 										"agentTarget":"B",
 										"portTarget":"port",
 										"portSource":"firstTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									},
-									{
+									"secondTerminal":{
 										"agentTarget":"C",
 										"portTarget":"port",
 										"portSource":"secondTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{
@@ -487,21 +487,21 @@
 									}
 									
 								},
-								"targetSet":[
-									{
+								"targetMap":{
+									"firstTerminal":{
 										"agentTarget":"A",
 										"portTarget":"port",
 										"portSource":"firstTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									},
-									{
+									"secondTerminal":{
 										"agentTarget":"B",
 										"portTarget":"port",
 										"portSource":"secondTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{

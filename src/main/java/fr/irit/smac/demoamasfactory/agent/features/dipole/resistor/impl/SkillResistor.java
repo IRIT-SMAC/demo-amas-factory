@@ -1,30 +1,17 @@
 package fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl;
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
-import fr.irit.smac.amasfactory.message.IMessage;
-import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.Terminal;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.impl.SkillDipole;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeResistor;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.ISkillResistor;
+import fr.irit.smac.demoamasfactory.agent.features.node.impl.PotentialDirection;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
-import fr.irit.smac.demoamasfactory.message.impl.DirectionRequest;
-import fr.irit.smac.demoamasfactory.message.impl.IntensityDirectionRequest;
-import fr.irit.smac.demoamasfactory.message.impl.IntensityMsg;
-import fr.irit.smac.demoamasfactory.message.impl.PotentialDirectionRequest;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
-import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
 public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>implements ISkillResistor<K> {
-
-    @Override
-    public void processMsg(IMessage message, IKnowledgeSocial knowledgeSocial) {
-        super.processMsg(message, knowledgeSocial);
-
-        if (message instanceof IntensityDirectionRequest) {
-            this.knowledge.getIntensityDirectionRequest().add((IntensityDirectionRequest) message);
-        }
-    }
 
     @Override
     public void publishValues(ISkillPlot<IKnowledgePlot> skillPlot, String id) {
@@ -42,41 +29,43 @@ public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>i
     }
 
     @Override
-    public void communicateIntensity(IKnowledgeSocial knowledgeSocial, String id) {
+    public void communicateIntensity(IKnowledgeSocial knowledgeSocial, ISkillSocial<IKnowledgeSocial> skillSocial, String id) {
 
-        IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
         final Double intensity = knowledge.getI();
         if (intensity != null) {
-            IntensityMsg firstMsg = new IntensityMsg(id, intensity);
-            msgBox.send(firstMsg, knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()).getId());
-            IntensityMsg secondMsg = new IntensityMsg(id, -intensity);
-            msgBox.send(secondMsg, knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()).getId());
+            Intensity firstMsg = new Intensity(intensity);
+            knowledgeSocial.getTargetMap().get(ETerminal.FIRST.getName()).setValue(firstMsg);
+            Intensity secondMsg = new Intensity(-intensity);
+            knowledgeSocial.getTargetMap().get(ETerminal.SECOND.getName()).setValue(secondMsg);
+            skillSocial.sendValueToTargets(id);
         }
     }
 
     @Override
-    public void requestPotentialUpdate(IKnowledgeSocial knowledgeSocial, String id) {
+    public void requestPotentialUpdate(IKnowledgeSocial knowledgeSocial, ISkillSocial<IKnowledgeSocial> skillSocial, String id) {
 
-        IMsgBox<IMessage> msgBox = knowledgeSocial.getMsgBox();
         EFeedback intensityDirection = knowledge.getIntensityDirection();
         Double worstIntensityCriticality = knowledge.getWorstIntensityCriticality();
 
         if (intensityDirection != null) {
-            PotentialDirectionRequest firstMsg = new PotentialDirectionRequest(id,
-                DirectionRequest.opposite(intensityDirection), worstIntensityCriticality,
+            PotentialDirection firstMsg = new PotentialDirection(
+                PotentialDirection.opposite(intensityDirection), worstIntensityCriticality,
                 knowledge.getFirstPotential());
-            msgBox.send(firstMsg, knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()).getId());
+            
+            knowledgeSocial.getTargetMap().get(ETerminal.FIRST.getName()).setValue(firstMsg);
 
             logger.debug("send V" +
-                DirectionRequest.opposite(intensityDirection) + " to "
-                + knowledgeSocial.getPortMap().get(Terminal.FIRST.getName()));
+                PotentialDirection.opposite(intensityDirection) + " to "
+                + ETerminal.FIRST.getName());
 
-            PotentialDirectionRequest secondMsg = new PotentialDirectionRequest(id,
+            PotentialDirection secondMsg = new PotentialDirection(
                 intensityDirection, worstIntensityCriticality, knowledge.getSecondPotential());
-            msgBox.send(secondMsg, knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()).getId());
+            knowledgeSocial.getTargetMap().get(ETerminal.SECOND.getName()).setValue(secondMsg);
 
             logger.debug("send V" + intensityDirection + " to " +
-                knowledgeSocial.getPortMap().get(Terminal.SECOND.getName()));
+                ETerminal.SECOND.getName());
+
+            skillSocial.sendValueToTargets(id);
 
             // clear request
             knowledge.setWorstIntensityCriticality(0d);
@@ -84,26 +73,4 @@ public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>i
         }
     }
 
-    @Override
-    public void handleIntensityDirectionRequest() {
-
-        this.knowledge.getIntensityDirectionRequest().forEach(m -> {
-            EFeedback direction = m.direction;
-            Double knownValue = m.knownValue;
-
-            if (m.getSender().equals(this.knowledge.equals(Terminal.SECOND.getName()))) {
-                direction = DirectionRequest.opposite(direction);
-                knownValue = -knownValue;
-            }
-
-            if (this.knowledge.getI().equals(knownValue)) {
-                if (this.knowledge.getWorstIntensityCriticality() < m.criticality) {
-                    this.knowledge.setWorstIntensityCriticality(m.criticality);
-                    this.knowledge.setIntensityDirection(direction);
-                    logger.debug("received I" + m.direction + " from "
-                        + m.getSender());
-                }
-            }
-        });
-    }
 }

@@ -170,7 +170,6 @@
 							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 							"knowledge":{
 								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-								"outputType":"java.lang.String",
 								"portMap":{
 									"firstTerminal":{
 										"id":"node1",
@@ -184,13 +183,16 @@
 									}
 									
 								},
-								"targetSet":[
+								"targetMap":{
+									
+									"firstTerminal":
 									{
 										"agentTarget":"node1",
 										"portTarget":"port",
 										"portSource":"firstTerminal",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									},
+									"secondTerminal":
 									{
 										"agentTarget":"node2",
 										"portTarget":"port",
@@ -198,7 +200,7 @@
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{

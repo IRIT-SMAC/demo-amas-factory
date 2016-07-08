@@ -4,13 +4,13 @@ import fr.irit.smac.amasfactory.agent.IKnowledge;
 
 public interface IKnowledgeDipole extends IKnowledge {
 
-    public enum Terminal {
+    public enum ETerminal {
 
         FIRST("firstTerminal"), SECOND("secondTerminal");
 
         String name;
 
-        private Terminal(String name) {
+        private ETerminal(String name) {
             this.name = name;
         }
 

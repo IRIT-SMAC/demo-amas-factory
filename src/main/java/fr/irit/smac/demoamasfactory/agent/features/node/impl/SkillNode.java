@@ -5,12 +5,11 @@ import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.Intensity;
 import fr.irit.smac.demoamasfactory.agent.features.node.IKnowledgeNode;
 import fr.irit.smac.demoamasfactory.agent.features.node.ISkillNode;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
-import fr.irit.smac.demoamasfactory.message.impl.IntensityMsg;
-import fr.irit.smac.demoamasfactory.message.impl.PotentialDirectionRequest;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
 
 public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISkillNode<K> {
@@ -23,12 +22,6 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
         }
         else if (message instanceof PortOfTargetMessage) {
             knowledgeSocial.getPortOfTargetMessageCollection().add((PortOfTargetMessage) message);
-        }
-        else if (message instanceof PotentialDirectionRequest) {
-            knowledge.getPotentialDirectionRequest().add((PotentialDirectionRequest) message);
-        }
-        else if (message instanceof IntensityMsg) {
-            knowledge.getIntensityMsg().add((IntensityMsg) message);
         }
     }
 
@@ -67,15 +60,14 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
                 }
             }
         }
-        
-        
+
     }
 
     @Override
     public void adjustPotential() {
-        
+
         if (this.knowledge.getPotentialDirection() != null) {
-            
+
             logger.debug(
                 "potential=" + this.knowledge.getPotential().getValue() + " adjust it "
                     + this.knowledge.getPotentialDirection());
@@ -92,23 +84,32 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
     }
 
     @Override
-    public void handlePotentialDirectionRequestMessage() {
+    public void handlePotentialDirectionRequestMessage(IKnowledgeSocial knowledgeSocial) {
 
-        this.knowledge.getPotentialDirectionRequest().forEach(m -> {
-            this.knowledge.setReceivedPdr(true);
-            if (m.knownValue.equals(this.knowledge.getPotential().getValue())
-                && this.knowledge.getWorstPotentialCriticality() < m.criticality) {
-                // logger.debug("received " + pdr);
-                this.knowledge.setWorstPotentialCriticality(m.criticality);
-                this.knowledge.setPotentialDirection(m.direction);
+        knowledgeSocial.getValuePortMessageCollection().forEach(m -> {
+
+            if (m.getValue() instanceof PotentialDirection) {
+                PotentialDirection p = (PotentialDirection) m.getValue();
+                this.knowledge.setReceivedPdr(true);
+                if (p.knownValue.equals(this.knowledge.getPotential().getValue())
+                    && this.knowledge.getWorstPotentialCriticality() < p.criticality) {
+                    // logger.debug("received " + pdr);
+                    this.knowledge.setWorstPotentialCriticality(p.criticality);
+                    this.knowledge.setPotentialDirection(p.direction);
+                }
             }
         });
     }
 
     @Override
-    public void handleIntensityMessage() {
-        
-        this.knowledge.getIntensityMsg().forEach(m -> this.knowledge.getIntensities().put(m.getSender(), m.getValue()));
+    public void handleIntensityMessage(IKnowledgeSocial knowledgeSocial) {
+
+        knowledgeSocial.getValuePortMessageCollection().forEach(m -> {
+
+            if (m.getValue() instanceof Intensity) {
+                this.knowledge.getIntensities().put(m.getSender(), ((Intensity) m.getValue()).getValue());
+            }
+        });
 
     }
 }

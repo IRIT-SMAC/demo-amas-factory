@@ -8,7 +8,7 @@ import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.impl.Agent;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.demoamasfactory.agent.features.MyFeatures;
-import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.Terminal;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
@@ -43,10 +43,10 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
         // update first and second potential
         this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().forEach(m -> {
             ValuePortMessage message = (ValuePortMessage) m;
-            if (message.getPort().equals(Terminal.FIRST.getName())) {
+            if (message.getPort().equals(ETerminal.FIRST.getName())) {
                 knowledgeUGenerator.setFirstPotential((Double) message.getValue());
             }
-            else if (message.getPort().equals(Terminal.SECOND.getName())) {
+            else if (message.getPort().equals(ETerminal.SECOND.getName())) {
                 knowledgeUGenerator.setSecondPotential((Double) message.getValue());
             }
         });
@@ -72,7 +72,7 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
         }
 
         else {
-            this.primaryFeature.getSkill().compareVoltageWithGeneratorTension(knowledgeSocial, id);
+            this.primaryFeature.getSkill().compareVoltageWithGeneratorTension(knowledgeSocial, skillSocial, id);
         }
     }
 }
