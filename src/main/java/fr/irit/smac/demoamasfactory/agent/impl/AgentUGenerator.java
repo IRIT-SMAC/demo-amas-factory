@@ -13,7 +13,6 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.Knowled
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
-import fr.irit.smac.demoamasfactory.service.impl.MyServices;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator, S extends SkillUGenerator<K>, P extends Feature<K, S>>

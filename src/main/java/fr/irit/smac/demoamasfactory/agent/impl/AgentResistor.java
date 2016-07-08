@@ -12,7 +12,6 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeRes
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.ISkillResistor;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
-import fr.irit.smac.demoamasfactory.service.impl.MyServices;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S extends ISkillResistor<K>, P extends Feature<K, S>>

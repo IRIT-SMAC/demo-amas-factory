@@ -8,9 +8,8 @@ public class SkillPlot<K extends IKnowledgePlot> extends Skill<K>implements ISki
 
     @Override
     public void publish(String name, Double value, String agentId) {
+
         if (this.knowledge.getAgentsFilter().test(agentId) && this.knowledge.getValuesFilter().test(name)) {
-            if (this.knowledge.getChart() == null) {
-            }
             this.knowledge.getChart().add(name, value);
         }
     }
