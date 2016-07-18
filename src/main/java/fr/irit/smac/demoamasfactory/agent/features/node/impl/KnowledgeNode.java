@@ -11,8 +11,6 @@ import fr.irit.smac.libs.tooling.avt.IAVT;
 
 public class KnowledgeNode extends Knowledge implements IKnowledgeNode {
 
-    private static final long serialVersionUID = 1L;
-
     public Double worstPotentialCriticality = 0d;
 
     public EFeedback potentialDirection;

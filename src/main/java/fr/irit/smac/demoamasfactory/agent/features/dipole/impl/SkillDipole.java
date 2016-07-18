@@ -14,10 +14,10 @@ public class SkillDipole<K extends IKnowledgeDipole> extends Skill<K> implements
     public void processMsg(IMessage m, IKnowledgeSocial knowledgeSocial) {
 
         if (m instanceof ValuePortMessage) {
-            knowledgeSocial.getValuePortMessageCollection().add((ValuePortMessage) m);
+            knowledgeSocial.getSendToTargetMessageCollection().add((ValuePortMessage) m);
         }
         else if (m instanceof PortOfTargetMessage) {
-            knowledgeSocial.getPortOfTargetMessageCollection().add((PortOfTargetMessage) m);
+            knowledgeSocial.getSendPortToTargetMessageCollection().add((PortOfTargetMessage) m);
         }
     }
 }

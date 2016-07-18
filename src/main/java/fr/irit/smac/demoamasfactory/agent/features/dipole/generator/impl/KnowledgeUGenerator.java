@@ -5,10 +5,12 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.impl.KnowledgeDipole;
 
 public class KnowledgeUGenerator extends KnowledgeDipole implements IKnowledgeUGenerator {
 
-    private static final long serialVersionUID = 1L;
-
     public KnowledgeUGenerator() {
         super();
+    }
+
+    public KnowledgeUGenerator(double tension) {
+        this.tension = tension;
     }
 
     @Override

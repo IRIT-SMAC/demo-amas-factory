@@ -2,20 +2,18 @@ package fr.irit.smac.demoamasfactory.agent.impl;
 
 import org.slf4j.Logger;
 
-import fr.irit.smac.amasfactory.agent.features.impl.Feature;
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
-import fr.irit.smac.amasfactory.agent.impl.Agent;
+import fr.irit.smac.amasfactory.agent.impl.TwoStepAgent;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
-import fr.irit.smac.demoamasfactory.agent.features.MyFeatures;
+import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeResistor;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.ISkillResistor;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
-import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
-public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S extends ISkillResistor<K>, P extends Feature<K, S>>
-    extends Agent<F, K, S, P>implements ITwoStepsAgent {
+public class AgentResistor<F extends IMyCommonFeatures, K extends IKnowledgeResistor, S extends ISkillResistor<K>>
+    extends TwoStepAgent<F, K, S> {
 
     public AgentResistor() {
     }
@@ -31,16 +29,16 @@ public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S
 
         IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
         knowledgeSocial.getMsgBox().getMsgs()
-            .forEach(m -> this.primaryFeature.getSkill().processMsg(m, knowledgeSocial));
+            .forEach(m -> this.getSkill().processMsg(m, knowledgeSocial));
     }
 
     @Override
     public void decideAndAct() {
 
-        IKnowledgeResistor knowledgeResistor = this.primaryFeature.getKnowledge();
+        IKnowledgeResistor knowledgeResistor = this.getKnowledge();
 
         // set first and second potential
-        this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().forEach(m -> {
+        this.commonFeatures.getFeatureSocial().getKnowledge().getSendToTargetMessageCollection().forEach(m -> {
             ValuePortMessage message = (ValuePortMessage) m;
             if (message.getPort().equals(ETerminal.FIRST.getName())) {
                 knowledgeResistor.setFirstPotential((Double) message.getValue());
@@ -50,25 +48,27 @@ public class AgentResistor<F extends MyFeatures, K extends IKnowledgeResistor, S
             }
         });
 
-        this.commonFeatures.getFeatureSocial().getKnowledge().getPortOfTargetMessageCollection().clear();
-        this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().clear();
+        this.commonFeatures.getFeatureSocial().getKnowledge().getSendPortToTargetMessageCollection().clear();
+        this.commonFeatures.getFeatureSocial().getKnowledge().getSendToTargetMessageCollection().clear();
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
 
         ISkillPlot<IKnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
-        this.primaryFeature.getSkill().publishValues(skillPlot, id);
+        this.getSkill().publishValues(skillPlot, id);
 
         // send message to terminals (in order to be added in their
         // neighborhood)
-        if (this.primaryFeature.getKnowledge().getFirstPotential() == null
-            || this.primaryFeature.getKnowledge().getSecondPotential() == null) {
+        if (this.getKnowledge().getFirstPotential() == null
+            || this.getKnowledge().getSecondPotential() == null) {
             this.commonFeatures.getFeatureSocial().getSkill()
                 .sendPort(this.commonFeatures.getFeatureBasic().getKnowledge().getId());
         }
 
         IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial()
             .getKnowledge();
-        this.primaryFeature.getSkill().communicateIntensity(knowledgeSocial, this.commonFeatures.getFeatureSocial().getSkill(), id);
-        this.primaryFeature.getSkill().requestPotentialUpdate(knowledgeSocial, this.commonFeatures.getFeatureSocial().getSkill(), id);
+        this.getSkill().communicateIntensity(knowledgeSocial,
+            this.commonFeatures.getFeatureSocial().getSkill(), id);
+        this.getSkill().requestPotentialUpdate(knowledgeSocial,
+            this.commonFeatures.getFeatureSocial().getSkill(), id);
     }
 }

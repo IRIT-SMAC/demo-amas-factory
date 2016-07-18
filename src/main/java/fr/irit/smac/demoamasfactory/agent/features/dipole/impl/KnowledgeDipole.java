@@ -7,8 +7,6 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole;
 
 public class KnowledgeDipole extends Knowledge implements IKnowledgeDipole {
 
-    private static final long serialVersionUID = 1L;
-
     @JsonProperty
     public Double tension;
     

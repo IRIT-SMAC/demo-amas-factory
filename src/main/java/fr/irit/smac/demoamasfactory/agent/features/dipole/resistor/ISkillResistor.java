@@ -6,7 +6,7 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.ISkillDipole;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 
-public interface ISkillResistor<K extends IKnowledgeResistor> extends ISkillDipole<K> {
+public interface ISkillResistor<K> extends ISkillDipole<K> {
 
     public void publishValues(ISkillPlot<IKnowledgePlot> skillPlot, String id);
 

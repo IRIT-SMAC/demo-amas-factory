@@ -1,21 +1,14 @@
 package fr.irit.smac.demoamasfactory.infrastructure.impl;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
-import fr.irit.smac.amasfactory.service.IServices;
+import fr.irit.smac.amasfactory.impl.Infrastructure;
 import fr.irit.smac.demoamasfactory.infrastructure.IDemoInfrastructure;
+import fr.irit.smac.demoamasfactory.service.IMyServices;
 
-public class DemoInfrastructure<T extends IServices<A>, A> extends BasicInfrastructure<T,A>
-    implements IDemoInfrastructure<T,A> {
+@SuppressWarnings("rawtypes")
+public class DemoInfrastructure<T extends IMyServices> extends Infrastructure<T>
+    implements IDemoInfrastructure<T> {
 
     public DemoInfrastructure() {
         super();
-    }
-    
-    public DemoInfrastructure(
-        @JsonProperty(value = "services", required = true) T services) {
-        super(services);
-
     }
 }

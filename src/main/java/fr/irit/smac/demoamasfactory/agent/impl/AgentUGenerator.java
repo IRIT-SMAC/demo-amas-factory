@@ -2,21 +2,19 @@ package fr.irit.smac.demoamasfactory.agent.impl;
 
 import org.slf4j.Logger;
 
-import fr.irit.smac.amasfactory.agent.features.impl.Feature;
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
-import fr.irit.smac.amasfactory.agent.impl.Agent;
+import fr.irit.smac.amasfactory.agent.impl.TwoStepAgent;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
-import fr.irit.smac.demoamasfactory.agent.features.MyFeatures;
+import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
-import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator;
-import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.IKnowledgeUGenerator;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.ISkillUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
-import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
-public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator, S extends SkillUGenerator<K>, P extends Feature<K, S>>
-    extends Agent<F, K, S, P>implements ITwoStepsAgent {
+public class AgentUGenerator<F extends IMyCommonFeatures, K extends IKnowledgeUGenerator, S extends ISkillUGenerator<K>>
+    extends TwoStepAgent<F, K, S> {
 
     public AgentUGenerator() {
     }
@@ -32,16 +30,16 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
 
         IKnowledgeSocial knowledgeSocial = this.commonFeatures.getFeatureSocial().getKnowledge();
         knowledgeSocial.getMsgBox().getMsgs()
-            .forEach(m -> this.primaryFeature.getSkill().processMsg(m, knowledgeSocial));
+            .forEach(m -> this.getSkill().processMsg(m, knowledgeSocial));
     }
 
     @Override
     public void decideAndAct() {
 
-        KnowledgeUGenerator knowledgeUGenerator = this.primaryFeature.getKnowledge();
+        IKnowledgeUGenerator knowledgeUGenerator = this.getKnowledge();
 
         // update first and second potential
-        this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().forEach(m -> {
+        this.commonFeatures.getFeatureSocial().getKnowledge().getSendToTargetMessageCollection().forEach(m -> {
             ValuePortMessage message = (ValuePortMessage) m;
             if (message.getPort().equals(ETerminal.FIRST.getName())) {
                 knowledgeUGenerator.setFirstPotential((Double) message.getValue());
@@ -51,12 +49,12 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
             }
         });
 
-        this.commonFeatures.getFeatureSocial().getKnowledge().getPortOfTargetMessageCollection().clear();
-        this.commonFeatures.getFeatureSocial().getKnowledge().getValuePortMessageCollection().clear();
+        this.commonFeatures.getFeatureSocial().getKnowledge().getSendPortToTargetMessageCollection().clear();
+        this.commonFeatures.getFeatureSocial().getKnowledge().getSendToTargetMessageCollection().clear();
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
         ISkillPlot<IKnowledgePlot> skillPlot = this.commonFeatures.getFeaturePlot().getSkill();
-        this.primaryFeature.getSkill().publishValues(skillPlot, id);
+        this.getSkill().publishValues(skillPlot, id);
 
         // logger.debug(knowledge.toString());
 
@@ -66,13 +64,13 @@ public class AgentUGenerator<F extends MyFeatures, K extends KnowledgeUGenerator
 
         // send message to terminals (in order to be added in their
         // neighborhood)
-        if (this.primaryFeature.getKnowledge().getFirstPotential() == null
-            || this.primaryFeature.getKnowledge().getSecondPotential() == null) {
+        if (this.getKnowledge().getFirstPotential() == null
+            || this.getKnowledge().getSecondPotential() == null) {
             skillSocial.sendPort(this.commonFeatures.getFeatureBasic().getKnowledge().getId());
         }
 
         else {
-            this.primaryFeature.getSkill().compareVoltageWithGeneratorTension(knowledgeSocial, skillSocial, id);
+            this.getSkill().compareVoltageWithGeneratorTension(knowledgeSocial, skillSocial, id);
         }
     }
 }

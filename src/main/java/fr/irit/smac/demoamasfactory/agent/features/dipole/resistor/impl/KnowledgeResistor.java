@@ -6,13 +6,15 @@ import fr.irit.smac.libs.tooling.avt.EFeedback;
 
 public class KnowledgeResistor extends KnowledgeDipole implements IKnowledgeResistor {
 
-    private static final long serialVersionUID = 1L;
-
     private Double worstIntensityCriticality = 0d;
 
     private EFeedback intensityDirection;
 
     public KnowledgeResistor() {
+    }
+    
+    public KnowledgeResistor(double resistor) {
+        this.resistor = resistor;
     }
 
     @Override

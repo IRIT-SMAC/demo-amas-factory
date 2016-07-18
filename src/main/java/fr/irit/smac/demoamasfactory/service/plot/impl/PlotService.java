@@ -1,6 +1,5 @@
 package fr.irit.smac.demoamasfactory.service.plot.impl;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
@@ -12,31 +11,29 @@ public class PlotService implements IPlotService {
     Predicate<String> agentsFilter = s -> true;
     Predicate<String> valuesFilter = s -> true;
 
-    AtomicInteger  nbAgents = new AtomicInteger(0);
-    AgentPlotChart nbChart  = new AgentPlotChart("# Agents");
-
+    AgentPlotChart nbAgent = new AgentPlotChart("# Agents");
+    
     @Override
     public void start() {
-        // TODO Auto-generated method stub
-
+        nbAgent.add(0);
     }
 
     @Override
     public void shutdown() throws ShutdownRuntimeException {
-        // TODO Auto-generated method stub
-
+        // Nothing to do
     }
-
-    public AgentPlotChart getNbChart() {
-        return nbChart;
+    
+    public void initMainChart(double nbAgents) {
+        this.nbAgent.add(nbAgents);
     }
 
     @Override
-    public AgentPlotChart initChart(String id) {
-
-        AgentPlotChart chart = new AgentPlotChart(id);
-        this.nbChart.add(this.nbAgents.incrementAndGet());
-        return chart;
+    public void setAgentsFilter(Predicate<String> agentsFilter) {
+        this.agentsFilter = agentsFilter;
     }
 
+    @Override
+    public Predicate<String> getAgentsFilter() {
+        return agentsFilter;
+    }
 }

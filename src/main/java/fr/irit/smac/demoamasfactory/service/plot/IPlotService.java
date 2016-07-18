@@ -1,10 +1,15 @@
 package fr.irit.smac.demoamasfactory.service.plot;
 
-import fr.irit.smac.amasfactory.service.IInfraService;
-import fr.irit.smac.libs.tooling.plot.server.AgentPlotChart;
+import java.util.function.Predicate;
 
-public interface IPlotService extends IInfraService{
+import fr.irit.smac.amasfactory.service.IService;
 
-    public AgentPlotChart initChart(String id);
+public interface IPlotService extends IService{
+
+    public void setAgentsFilter(Predicate<String> agentsFilter);
+
+    public Predicate<String> getAgentsFilter();
+
+    public void initMainChart(double nbAgents);
 
 }

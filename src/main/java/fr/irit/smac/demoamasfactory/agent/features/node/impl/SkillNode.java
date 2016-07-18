@@ -18,24 +18,31 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
     public void processMsg(IMessage message, IKnowledgeSocial knowledgeSocial) {
 
         if (message instanceof ValuePortMessage) {
-            knowledgeSocial.getValuePortMessageCollection().add((ValuePortMessage) message);
+            knowledgeSocial.getSendToTargetMessageCollection().add((ValuePortMessage) message);
         }
         else if (message instanceof PortOfTargetMessage) {
-            knowledgeSocial.getPortOfTargetMessageCollection().add((PortOfTargetMessage) message);
+            knowledgeSocial.getSendPortToTargetMessageCollection().add((PortOfTargetMessage) message);
         }
     }
 
     @Override
     public void publishValue(ISkillPlot<IKnowledgePlot> skillPlot, String id) {
 
+
         skillPlot.publish("potential",
             this.knowledge.getPotential().getValue(), id);
         logger.debug("potential: " +
             this.knowledge.getPotential().getValue());
 
-        this.knowledge.getIntensities().forEach((k, v) -> {
-            skillPlot.publish(k, v, id);
-        });
+        if (knowledge.getIntensities().get("R1") != null) {
+            skillPlot.publish("R1", knowledge.getIntensities().get("R1"), id);
+        }
+        if (knowledge.getIntensities().get("R2") != null) {
+            skillPlot.publish("R2", knowledge.getIntensities().get("R2"), id);
+        }
+        if (knowledge.getIntensities().get("R3") != null) {
+            skillPlot.publish("R3", knowledge.getIntensities().get("R3"), id);
+        }
     }
 
     @Override
@@ -86,7 +93,7 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
     @Override
     public void handlePotentialDirectionRequestMessage(IKnowledgeSocial knowledgeSocial) {
 
-        knowledgeSocial.getValuePortMessageCollection().forEach(m -> {
+        knowledgeSocial.getSendToTargetMessageCollection().forEach(m -> {
 
             if (m.getValue() instanceof PotentialDirection) {
                 PotentialDirection p = (PotentialDirection) m.getValue();
@@ -104,7 +111,7 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
     @Override
     public void handleIntensityMessage(IKnowledgeSocial knowledgeSocial) {
 
-        knowledgeSocial.getValuePortMessageCollection().forEach(m -> {
+        knowledgeSocial.getSendToTargetMessageCollection().forEach(m -> {
 
             if (m.getValue() instanceof Intensity) {
                 this.knowledge.getIntensities().put(m.getSender(), ((Intensity) m.getValue()).getValue());

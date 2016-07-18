@@ -7,4 +7,6 @@ public interface IMyServices<A> extends IServices<A>{
 
     public IPlotService getPlotService();
 
+    public void setPlotService(IPlotService plotService);
+
 }
