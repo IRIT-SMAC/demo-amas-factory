@@ -41,7 +41,7 @@ public class AgentNode
         IKnowledgeSocial knowledgeSocial = commonFeatures.getFeatureSocial().getKnowledge();
         ISkillPlot<IKnowledgePlot> skillPlot = commonFeatures.getFeaturePlot().getSkill();
 
-        String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
+        String id = commonFeatures.getFeatureBasic().getKnowledge().getId();
 
         skill.handlePotentialDirection(knowledgeSocial);
         skill.handleIntensityMessage(knowledgeSocial);
@@ -50,8 +50,8 @@ public class AgentNode
         skill.applyKirchhoffLaw();
         skill.adjustPotential();
 
-        knowledgeSocial.setOutputValue(knowledge.getPotential().getValue());
-        skillSocial.sendOutputValue(id);
+        knowledgeSocial.getTargetMap()
+            .forEach((k, v) -> skillSocial.sendDataToTarget(v.getAgentId().concat(v.getPortTarget()), knowledge.getPotential().getValue(), id));
         skill.cleanKnowledge();
 
         skillSocial.clearPortMap();

@@ -32,18 +32,15 @@
               "className" : "fr.irit.smac.amasfactory.agent.features.impl.Feature",
               "knowledge" : {
                 "targetMap" : { },
-                "outputType" : "java.lang.Double",
                 "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
                 "portMap" : {
                   "port" : {
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Port",
-                    "id" : "port",
-                    "type" : "java.lang.String"
+                    "id" : "port"
                   },
                   "potentialDirection" : {
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Port",
-                    "id" : "potentialDirection",
-                    "type" : null
+                    "id" : "potentialDirection"
                   }
                 }
               }
@@ -86,18 +83,15 @@
               "className" : "fr.irit.smac.amasfactory.agent.features.impl.Feature",
               "knowledge" : {
                 "targetMap" : { },
-                "outputType" : "java.lang.Double",
                 "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
                 "portMap" : {
                   "port" : {
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Port",
-                    "id" : "port",
-                    "type" : "java.lang.String"
+                    "id" : "port"
                   },
                   "potentialDirection" : {
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Port",
-                    "id" : "potentialDirection",
-                    "type" : null
+                    "id" : "potentialDirection"
                   }
                 }
               }
@@ -169,13 +163,11 @@
                 "portMap" : {
                   "firstTerminal" : {
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Port",
-                    "id" : "firstTerminal",
-                    "type" : "java.lang.String"
+                    "id" : "firstTerminal"
                   },
                   "secondTerminal" : {
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Port",
-                    "id" : "secondTerminal",
-                    "type" : "java.lang.String"
+                    "id" : "secondTerminal"
                   }
                 }
               }

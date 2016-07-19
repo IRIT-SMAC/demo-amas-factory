@@ -86,31 +86,35 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
     @Override
     public void handlePotentialDirection(IKnowledgeSocial knowledgeSocial) {
 
-        knowledgeSocial.getPortMap().get(ENode.POTENTIAL_DIRECTION.getName()).getValue().iterator().forEachRemaining(o -> {
-            if (o instanceof PotentialDirection) {
-                PotentialDirection p = (PotentialDirection) o;
-                knowledge.setReceivedPdr(true);
-                if (p.knownValue.equals(knowledge.getPotential().getValue())
-                    && knowledge.getWorstPotentialCriticality() < p.criticality) {
-                    // logger.debug("received " + pdr);
-                    knowledge.setWorstPotentialCriticality(p.criticality);
-                    knowledge.setPotentialDirection(p.direction);
+        knowledgeSocial.getPortMap().get(ENode.POTENTIAL_DIRECTION.getName()).getValue().iterator()
+            .forEachRemaining(o -> {
+                if (o instanceof PotentialDirection) {
+                    PotentialDirection p = (PotentialDirection) o;
+                    knowledge.setReceivedPdr(true);
+                    if (p.knownValue.equals(knowledge.getPotential().getValue())
+                        && knowledge.getWorstPotentialCriticality() < p.criticality) {
+                        // logger.debug("received " + pdr);
+                        knowledge.setWorstPotentialCriticality(p.criticality);
+                        knowledge.setPotentialDirection(p.direction);
+                    }
                 }
-            }
-        });
+            });
 
     }
 
     @Override
     public void handleIntensityMessage(IKnowledgeSocial knowledgeSocial) {
 
-        knowledgeSocial.getPortMap().get(ENode.INTENSITY.getName()).getValue().iterator().forEachRemaining(intensity -> {
-            if (intensity instanceof Intensity) {
-                Intensity i = (Intensity) intensity;
-                knowledge.getIntensities().put(i.getSender(),
-                    i.getValue());
-            }
-        });
+        if (knowledgeSocial.getPortMap().get(ENode.INTENSITY.getName()) != null) {
+            knowledgeSocial.getPortMap().get(ENode.INTENSITY.getName()).getValue().iterator()
+                .forEachRemaining(intensity -> {
+                    if (intensity instanceof Intensity) {
+                        Intensity i = (Intensity) intensity;
+                        knowledge.getIntensities().put(i.getSender(),
+                            i.getValue());
+                    }
+                });
+        }
 
     }
 }
