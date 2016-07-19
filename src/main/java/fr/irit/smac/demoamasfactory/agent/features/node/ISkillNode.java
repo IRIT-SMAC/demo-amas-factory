@@ -9,7 +9,7 @@ import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 
 public interface ISkillNode<K extends IKnowledgeNode> extends ISkill<K> {
 
-    public void handlePotentialDirectionRequestMessage(IKnowledgeSocial knowledgeSocial);
+    public void handlePotentialDirection(IKnowledgeSocial knowledgeSocial);
     
     public void handleIntensityMessage(IKnowledgeSocial knowledgeSocial);
     

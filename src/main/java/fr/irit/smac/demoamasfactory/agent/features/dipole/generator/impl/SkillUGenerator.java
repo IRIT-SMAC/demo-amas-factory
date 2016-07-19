@@ -2,6 +2,9 @@ package fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl;
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
+import fr.irit.smac.amasfactory.agent.features.social.ITarget;
+import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
+import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.IKnowledgeUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.ISkillUGenerator;
@@ -57,9 +60,22 @@ public class SkillUGenerator<K extends IKnowledgeUGenerator> extends SkillDipole
             EFeedback.GREATER, 100d, greaterReceiver, id);
         PotentialDirection lowerMsg = new PotentialDirection(
             EFeedback.LOWER, 100d, lowerReceiver, id);
-        knowledgeSocial.getTargetMap().get(idGreaterReceiver).setValue(greaterMsg);
-        knowledgeSocial.getTargetMap().get(idLowerReceiver).setValue(lowerMsg);
-        skillSocial.sendValueToTargets(id);
+        
+        ITarget target = knowledgeSocial.getTargetMap().get(idGreaterReceiver + "PotentialDirection");
+        String agentId = target.getAgentId();
+        String portTarget = target.getPortTarget();
+        knowledgeSocial.getMsgBox().send(new ValuePortMessage(portTarget,greaterMsg, id),
+            agentId);
+        
+        ITarget target2 = knowledgeSocial.getTargetMap().get(idLowerReceiver + "PotentialDirection");
+        String agentId2 = target2.getAgentId();
+        String portTarget2 = target2.getPortTarget();
+        knowledgeSocial.getMsgBox().send(new ValuePortMessage(portTarget2,lowerMsg, id),
+            agentId2);
+        
+//        knowledgeSocial.getTargetMap().get(idGreaterReceiver).setValue(greaterMsg);
+//        knowledgeSocial.getTargetMap().get(idLowerReceiver).setValue(lowerMsg);
+//        skillSocial.sendValueToTargets(id);
         logger.debug("Sent msg: UP: " + idGreaterReceiver + " DOWN: " + idLowerReceiver);
     }
 }

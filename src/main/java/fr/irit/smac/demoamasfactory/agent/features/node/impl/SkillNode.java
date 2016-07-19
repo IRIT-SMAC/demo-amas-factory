@@ -6,8 +6,8 @@ import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.Intensity;
 import fr.irit.smac.demoamasfactory.agent.features.node.IKnowledgeNode;
-import fr.irit.smac.demoamasfactory.agent.features.node.ISkillNode;
 import fr.irit.smac.demoamasfactory.agent.features.node.IKnowledgeNode.ENode;
+import fr.irit.smac.demoamasfactory.agent.features.node.ISkillNode;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 import fr.irit.smac.libs.tooling.avt.EFeedback;
@@ -84,9 +84,9 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
     }
 
     @Override
-    public void handlePotentialDirectionRequestMessage(IKnowledgeSocial knowledgeSocial) {
+    public void handlePotentialDirection(IKnowledgeSocial knowledgeSocial) {
 
-        knowledgeSocial.getPortMap().get(ENode.PORT.getName()).getValue().iterator().forEachRemaining(o -> {
+        knowledgeSocial.getPortMap().get(ENode.POTENTIAL_DIRECTION.getName()).getValue().iterator().forEachRemaining(o -> {
             if (o instanceof PotentialDirection) {
                 PotentialDirection p = (PotentialDirection) o;
                 knowledge.setReceivedPdr(true);
@@ -104,10 +104,9 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
     @Override
     public void handleIntensityMessage(IKnowledgeSocial knowledgeSocial) {
 
-        knowledgeSocial.getPortMap().get(ENode.PORT.getName()).getValue().iterator().forEachRemaining(intensity -> {
+        knowledgeSocial.getPortMap().get(ENode.INTENSITY.getName()).getValue().iterator().forEachRemaining(intensity -> {
             if (intensity instanceof Intensity) {
                 Intensity i = (Intensity) intensity;
-
                 knowledge.getIntensities().put(i.getSender(),
                     i.getValue());
             }

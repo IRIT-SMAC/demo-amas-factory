@@ -43,7 +43,7 @@ public class AgentNode
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
 
-        skill.handlePotentialDirectionRequestMessage(knowledgeSocial);
+        skill.handlePotentialDirection(knowledgeSocial);
         skill.handleIntensityMessage(knowledgeSocial);
         skill.publishValue(skillPlot,
             id);

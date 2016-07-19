@@ -121,6 +121,10 @@ public class DemoAmasFactory3 {
         try {
             agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put("port",
                 new Port("port", Class.forName("java.lang.String")));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put("potentialDirection",
+                new Port("potentialDirection", Class.forName("java.lang.String")));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put("intensity",
+                new Port("intensity", Class.forName("java.lang.String")));
         }
         catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
@@ -154,6 +158,11 @@ public class DemoAmasFactory3 {
                 new Target(node1, "port", "firstTerminal"));
             commonFeatures.getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminal",
                 new Target(node2, "port", "secondTerminal"));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("firstTerminalIntensity",
+                new Target(node1, "intensity", null));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminalIntensity",
+                new Target(node2, "intensity", null));
+
         }
         catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
@@ -183,6 +192,11 @@ public class DemoAmasFactory3 {
                 new Target(node1, "port", "firstTerminal"));
             agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminal",
                 new Target(node2, "port", "secondTerminal"));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("firstTerminalPotentialDirection",
+                new Target(node1, "potentialDirection", null));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminalPotentialDirection",
+                new Target(node2, "potentialDirection", null));
+
         }
         catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block

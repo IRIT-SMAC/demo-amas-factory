@@ -10,7 +10,7 @@ public interface IKnowledgeNode extends IKnowledge {
 
     public enum ENode {
 
-        PORT("port");
+        PORT("port"), POTENTIAL_DIRECTION("potentialDirection"), INTENSITY("intensity");
 
         String name;
 
