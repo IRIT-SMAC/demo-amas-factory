@@ -310,7 +310,19 @@
                   "secondTerminalIntensity" : {
                     "portSource" : null,
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
-                    "portTarget" : "intensity",
+                    "portTarget" : "potentialDirection",
+                    "agentTarget" : "C"
+                  },
+                  "firstTerminalPotentialDirection" : {
+                    "portSource" : null,
+                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
+                    "portTarget" : "potentialDirection",
+                    "agentTarget" : "B"
+                  },
+                  "secondTerminalPotentialDirection" : {
+                    "portSource" : null,
+                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
+                    "portTarget" : null,
                     "agentTarget" : "C"
                   }
                 },
@@ -392,6 +404,18 @@
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
                     "portTarget" : "intensity",
                     "agentTarget" : "C"
+                  },
+                  "firstTerminalPotentialDirection" : {
+                    "portSource" : null,
+                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
+                    "portTarget" : "potentialDirection",
+                    "agentTarget" : "B"
+                  },
+                  "secondTerminalPotentialDirection" : {
+                    "portSource" : null,
+                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
+                    "portTarget" : "potentialDirection",
+                    "agentTarget" : "C"
                   }
                 },
                 "outputType" : "java.lang.String",
@@ -471,6 +495,18 @@
                     "portSource" : null,
                     "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
                     "portTarget" : "intensity",
+                    "agentTarget" : "A"
+                  },
+                  "secondTerminalPotentialDirection" : {
+                    "portSource" : null,
+                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
+                    "portTarget" : "potentialDirection",
+                    "agentTarget" : "B"
+                  },
+                  "firstTerminalPotentialDirection" : {
+                    "portSource" : null,
+                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
+                    "portTarget" : "potentialDirection",
                     "agentTarget" : "A"
                   }
                 },

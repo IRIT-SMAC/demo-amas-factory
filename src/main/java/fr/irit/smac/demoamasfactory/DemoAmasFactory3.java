@@ -17,6 +17,7 @@ import fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService;
 import fr.irit.smac.amasfactory.service.messaging.impl.MessagingService;
 import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures;
+import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.IKnowledgeUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUGenerator;
@@ -48,7 +49,7 @@ public class DemoAmasFactory3 {
 
         DemoFactory<T, A> demoFactory = new DemoFactory<>();
 
-        IDemoInfrastructure<T,A> infra = demoFactory.createInfrastructure();
+        IDemoInfrastructure<T, A> infra = demoFactory.createInfrastructure();
 
         infra.setServices((T) initServices());
         infra.getServices().getAgentHandlerService().setAgentMap((Map<String, A>) initAgentMap());
@@ -92,7 +93,7 @@ public class DemoAmasFactory3 {
 
     private static <A extends TwoStepAgent<F, IKnowledge, ISkill<IKnowledge>>, F extends IMyCommonFeatures> IMyServices<A> initServices() {
 
-        MyServices<A,F> services = new MyServices<>();
+        MyServices<A, F> services = new MyServices<>();
         services.setAgentHandlerService(new BasicAgentHandler<>());
         services.setExecutionService(new TwoStepAgExecutionService<>());
         services.setMessagingService(new MessagingService<>());
@@ -150,18 +151,26 @@ public class DemoAmasFactory3 {
         commonFeatures.initFeatureSocial();
 
         try {
-            commonFeatures.getFeatureSocial().getKnowledge().getPortMap().put("firstTerminal",
-                new Port("firstTerminal", Class.forName("java.lang.String")));
-            commonFeatures.getFeatureSocial().getKnowledge().getPortMap().put("secondTerminal",
-                new Port("secondTerminal", Class.forName("java.lang.String")));
-            commonFeatures.getFeatureSocial().getKnowledge().getTargetMap().put("firstTerminal",
-                new Target(node1, "port", "firstTerminal"));
-            commonFeatures.getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminal",
-                new Target(node2, "port", "secondTerminal"));
-            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("firstTerminalIntensity",
+            commonFeatures.getFeatureSocial().getKnowledge().getPortMap().put(ETerminal.FIRST.getName(),
+                new Port(ETerminal.FIRST.getName(), Class.forName("java.lang.String")));
+            commonFeatures.getFeatureSocial().getKnowledge().getPortMap().put(ETerminal.SECOND.getName(),
+                new Port(ETerminal.SECOND.getName(), Class.forName("java.lang.String")));
+            commonFeatures.getFeatureSocial().getKnowledge().getTargetMap().put(ETerminal.FIRST.getName(),
+                new Target(node1, "port", ETerminal.FIRST.getName()));
+            commonFeatures.getFeatureSocial().getKnowledge().getTargetMap().put(ETerminal.SECOND.getName(),
+                new Target(node2, "port", ETerminal.SECOND.getName()));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(
+                ETerminal.FIRST.getName() + "Intensity",
                 new Target(node1, "intensity", null));
-            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminalIntensity",
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(
+                ETerminal.SECOND.getName() + "Intensity",
                 new Target(node2, "intensity", null));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(
+                ETerminal.FIRST.getName() + "PotentialDirection",
+                new Target(node1, "potentialDirection", null));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(
+                ETerminal.SECOND.getName() + "PotentialDirection",
+                new Target(node2, "potentialDirection", null));
 
         }
         catch (ClassNotFoundException e) {
@@ -184,17 +193,19 @@ public class DemoAmasFactory3 {
         initFeaturePlot(agent.getFeatures());
 
         try {
-            agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put("firstTerminal",
-                new Port("firstTerminal", Class.forName("java.lang.String")));
-            agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put("secondTerminal",
-                new Port("secondTerminal", Class.forName("java.lang.String")));
-            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("firstTerminal",
-                new Target(node1, "port", "firstTerminal"));
-            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminal",
-                new Target(node2, "port", "secondTerminal"));
-            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("firstTerminalPotentialDirection",
+            agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put(ETerminal.FIRST.getName(),
+                new Port(ETerminal.FIRST.getName(), Class.forName("java.lang.String")));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put(ETerminal.SECOND.getName(),
+                new Port(ETerminal.SECOND.getName(), Class.forName("java.lang.String")));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(ETerminal.FIRST.getName(),
+                new Target(node1, "port", ETerminal.FIRST.getName()));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(ETerminal.SECOND.getName(),
+                new Target(node2, "port", ETerminal.SECOND.getName()));
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(
+                ETerminal.FIRST.getName() + "PotentialDirection",
                 new Target(node1, "potentialDirection", null));
-            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put("secondTerminalPotentialDirection",
+            agent.getFeatures().getFeatureSocial().getKnowledge().getTargetMap().put(
+                ETerminal.SECOND.getName() + "PotentialDirection",
                 new Target(node2, "potentialDirection", null));
 
         }
