@@ -2,15 +2,17 @@ package fr.irit.smac.demoamasfactory.agent.impl;
 
 import org.slf4j.Logger;
 
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.impl.TwoStepAgent;
-import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.node.IKnowledgeNode;
 import fr.irit.smac.demoamasfactory.agent.features.node.ISkillNode;
-import fr.irit.smac.libs.tooling.messaging.IMsgBox;
+import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
+import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 
-public class AgentNode<F extends IMyCommonFeatures, K extends IKnowledgeNode, S extends ISkillNode<K>>
-    extends TwoStepAgent<F, K, S> {
+public class AgentNode
+    extends TwoStepAgent<IMyCommonFeatures, IKnowledgeNode, ISkillNode<IKnowledgeNode>> {
 
     public AgentNode() {
 
@@ -25,34 +27,34 @@ public class AgentNode<F extends IMyCommonFeatures, K extends IKnowledgeNode, S 
     @Override
     public void perceive() {
 
-        IMsgBox<IMessage> msgBox = this.commonFeatures.getFeatureSocial().getKnowledge().getMsgBox();
-        msgBox.getMsgs().forEach(
-            m -> this.getSkill().processMsg(m, this.commonFeatures.getFeatureSocial().getKnowledge()));
+        ISkillSocial<IKnowledgeSocial> skillSocial = commonFeatures.getFeatureSocial().getSkill();
+        IKnowledgeSocial knowledgeSocial = commonFeatures.getFeatureSocial().getKnowledge();
+
+        knowledgeSocial.getMsgBox().getMsgs()
+            .forEach(m -> skill.processMsg(skillSocial, m));
     }
 
     @Override
     public void decideAndAct() {
 
-        this.commonFeatures.getFeatureSocial().getSkill().addTargetFromMessage();
+        ISkillSocial<IKnowledgeSocial> skillSocial = commonFeatures.getFeatureSocial().getSkill();
+        IKnowledgeSocial knowledgeSocial = commonFeatures.getFeatureSocial().getKnowledge();
+        ISkillPlot<IKnowledgePlot> skillPlot = commonFeatures.getFeaturePlot().getSkill();
 
         String id = this.commonFeatures.getFeatureBasic().getKnowledge().getId();
-        
-        ISkillNode<K> skill = this.getSkill();
-        skill.handlePotentialDirectionRequestMessage(this.commonFeatures.getFeatureSocial().getKnowledge());
-        skill.handleIntensityMessage(this.commonFeatures.getFeatureSocial().getKnowledge());
-        skill.publishValue(this.commonFeatures.getFeaturePlot().getSkill(),
-            id);
 
-        this.commonFeatures.getFeatureSocial().getKnowledge().getSendPortToTargetMessageCollection().clear();
-        this.commonFeatures.getFeatureSocial().getKnowledge().getSendToTargetMessageCollection().clear();
+        skill.handlePotentialDirectionRequestMessage(knowledgeSocial);
+        skill.handleIntensityMessage(knowledgeSocial);
+        skill.publishValue(skillPlot,
+            id);
         skill.applyKirchhoffLaw();
         skill.adjustPotential();
 
-        IKnowledgeNode knowledge = this.getKnowledge();
-        this.commonFeatures.getFeatureSocial().getKnowledge().setOutputValue(knowledge.getPotential().getValue());
-        this.commonFeatures.getFeatureSocial().getSkill().sendOutputValue(id);
+        knowledgeSocial.setOutputValue(knowledge.getPotential().getValue());
+        skillSocial.sendOutputValue(id);
         skill.cleanKnowledge();
 
+        skillSocial.clearPortMap();
     }
 
 }

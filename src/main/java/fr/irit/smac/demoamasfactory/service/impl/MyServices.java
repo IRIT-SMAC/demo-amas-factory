@@ -2,16 +2,16 @@ package fr.irit.smac.demoamasfactory.service.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
+import fr.irit.smac.amasfactory.agent.impl.TwoStepAgent;
 import fr.irit.smac.amasfactory.service.impl.Services;
 import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.service.IMyServices;
 import fr.irit.smac.demoamasfactory.service.plot.IPlotService;
 
-public class MyServices<A extends IAgent<F, K, S>, F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>>
-    extends Services<A>implements IMyServices<A> {
+public class MyServices<A extends TwoStepAgent<F, IKnowledge, ISkill<IKnowledge>>, F extends IMyCommonFeatures>
+    extends Services<A, F>implements IMyServices<A> {
 
     @JsonProperty
     private IPlotService plotService;
@@ -33,7 +33,7 @@ public class MyServices<A extends IAgent<F, K, S>, F extends IMyCommonFeatures, 
     @Override
     public void start() {
         super.start();
-        
+
         plotService.start();
         plotService.initMainChart(getAgentHandlerService().getAgentMap().size());
         this.getAgentHandlerService().getAgentMap()

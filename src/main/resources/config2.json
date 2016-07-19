@@ -218,12 +218,12 @@
 								"outputType":"java.lang.Double",
 								"portMap":{
 									"firstTerminal":{
-										"id":"A",
+										"id":"firstTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									},
 									"secondTerminal":{
-										"id":"C",
+										"id":"secondTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									}
@@ -294,12 +294,12 @@
 								"outputType":"java.lang.Double",
 								"portMap":{
 									"firstTerminal":{
-										"id":"B",
+										"id":"firstTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									},
 									"secondTerminal":{
-										"id":"C",
+										"id":"secondTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									}
@@ -370,12 +370,12 @@
 								"outputType":"java.lang.String",
 								"portMap":{
 									"firstTerminal":{
-										"id":"B",
+										"id":"firstTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									},
 									"secondTerminal":{
-										"id":"C",
+										"id":"secondTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									}
@@ -446,12 +446,12 @@
 								"outputType":"java.lang.Double",
 								"portMap":{
 									"firstTerminal":{
-										"id":"A",
+										"id":"firstTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									},
 									"secondTerminal":{
-										"id":"B",
+										"id":"secondTerminal",
 										"type":"java.lang.Double",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									}

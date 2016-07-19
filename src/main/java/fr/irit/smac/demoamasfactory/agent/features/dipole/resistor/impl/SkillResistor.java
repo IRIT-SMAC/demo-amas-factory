@@ -29,20 +29,22 @@ public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>i
     }
 
     @Override
-    public void communicateIntensity(IKnowledgeSocial knowledgeSocial, ISkillSocial<IKnowledgeSocial> skillSocial, String id) {
+    public void communicateIntensity(IKnowledgeSocial knowledgeSocial, ISkillSocial<IKnowledgeSocial> skillSocial,
+        String id) {
 
         final Double intensity = knowledge.getI();
         if (intensity != null) {
-            Intensity firstMsg = new Intensity(intensity);
+            Intensity firstMsg = new Intensity(intensity, id);
             knowledgeSocial.getTargetMap().get(ETerminal.FIRST.getName()).setValue(firstMsg);
-            Intensity secondMsg = new Intensity(-intensity);
+            Intensity secondMsg = new Intensity(-intensity, id);
             knowledgeSocial.getTargetMap().get(ETerminal.SECOND.getName()).setValue(secondMsg);
             skillSocial.sendValueToTargets(id);
         }
     }
 
     @Override
-    public void requestPotentialUpdate(IKnowledgeSocial knowledgeSocial, ISkillSocial<IKnowledgeSocial> skillSocial, String id) {
+    public void requestPotentialUpdate(IKnowledgeSocial knowledgeSocial, ISkillSocial<IKnowledgeSocial> skillSocial,
+        String id) {
 
         EFeedback intensityDirection = knowledge.getIntensityDirection();
         Double worstIntensityCriticality = knowledge.getWorstIntensityCriticality();
@@ -50,24 +52,21 @@ public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>i
         if (intensityDirection != null) {
             PotentialDirection firstMsg = new PotentialDirection(
                 PotentialDirection.opposite(intensityDirection), worstIntensityCriticality,
-                knowledge.getFirstPotential());
-            
+                knowledge.getFirstPotential(), id);
+
             knowledgeSocial.getTargetMap().get(ETerminal.FIRST.getName()).setValue(firstMsg);
 
-            logger.debug("send V" +
-                PotentialDirection.opposite(intensityDirection) + " to "
-                + ETerminal.FIRST.getName());
+            logger
+                .debug("send V" + PotentialDirection.opposite(intensityDirection) + " to " + ETerminal.FIRST.getName());
 
             PotentialDirection secondMsg = new PotentialDirection(
-                intensityDirection, worstIntensityCriticality, knowledge.getSecondPotential());
+                intensityDirection, worstIntensityCriticality, knowledge.getSecondPotential(), id);
             knowledgeSocial.getTargetMap().get(ETerminal.SECOND.getName()).setValue(secondMsg);
 
-            logger.debug("send V" + intensityDirection + " to " +
-                ETerminal.SECOND.getName());
+            logger.debug("send V" + intensityDirection + " to " + ETerminal.SECOND.getName());
 
             skillSocial.sendValueToTargets(id);
 
-            // clear request
             knowledge.setWorstIntensityCriticality(0d);
             knowledge.setIntensityDirection(null);
         }

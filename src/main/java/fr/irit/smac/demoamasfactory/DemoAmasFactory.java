@@ -11,14 +11,13 @@ public class DemoAmasFactory {
 
     final static Logger LOGGER = Logger.getLogger(DemoAmasFactory.class.getName());
 
-    @SuppressWarnings("rawtypes")
-    public static void main(String[] args) throws IOException {
+    public static <T extends IMyServices<A>, A> void main(String[] args) throws IOException {
 
-        DemoFactory demoFactory = new DemoFactory();
-        
-        IDemoInfrastructure<IMyServices> infra = (IDemoInfrastructure<IMyServices>) demoFactory.createInfrastructure(
+        DemoFactory<T, A> demoFactory = new DemoFactory<>();
+
+        IDemoInfrastructure<T, A> infra = demoFactory.createInfrastructure(
             ClassLoader.getSystemResourceAsStream("config.json"));
-        
+
         infra.getServices().getExecutionService().step();
         infra.getServices().getExecutionService().step();
         infra.getServices().getExecutionService().step();

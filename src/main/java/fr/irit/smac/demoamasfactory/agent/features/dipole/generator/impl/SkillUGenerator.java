@@ -54,14 +54,12 @@ public class SkillUGenerator<K extends IKnowledgeUGenerator> extends SkillDipole
         String idGreaterReceiver, IKnowledgeSocial knowledgeSocial, ISkillSocial<IKnowledgeSocial> skillSocial) {
 
         PotentialDirection greaterMsg = new PotentialDirection(
-            EFeedback.GREATER, 100d, greaterReceiver);
+            EFeedback.GREATER, 100d, greaterReceiver, id);
         PotentialDirection lowerMsg = new PotentialDirection(
-            EFeedback.LOWER, 100d, lowerReceiver);
+            EFeedback.LOWER, 100d, lowerReceiver, id);
         knowledgeSocial.getTargetMap().get(idGreaterReceiver).setValue(greaterMsg);
         knowledgeSocial.getTargetMap().get(idLowerReceiver).setValue(lowerMsg);
         skillSocial.sendValueToTargets(id);
-        logger.debug(
-            "Sent msg: UP: " + idGreaterReceiver
-                + " DOWN: " + idLowerReceiver);
+        logger.debug("Sent msg: UP: " + idGreaterReceiver + " DOWN: " + idLowerReceiver);
     }
 }

@@ -159,12 +159,12 @@
 								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 								"portMap":{
 									"firstTerminal":{
-										"id":"node1",
+										"id":"firstTerminal",
 										"type":"java.lang.String",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									},
 									"secondTerminal":{
-										"id":"node2",
+										"id":"secondTerminal",
 										"type":"java.lang.String",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 									}

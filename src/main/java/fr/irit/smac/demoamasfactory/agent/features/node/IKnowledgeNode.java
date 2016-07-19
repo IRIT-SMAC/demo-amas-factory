@@ -8,6 +8,21 @@ import fr.irit.smac.libs.tooling.avt.IAVT;
 
 public interface IKnowledgeNode extends IKnowledge {
 
+    public enum ENode {
+
+        PORT("port");
+
+        String name;
+
+        private ENode(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+    }
+
     public Double getPreviousISumChange();
 
     public void setPreviousISumChange(Double previousISumChange);

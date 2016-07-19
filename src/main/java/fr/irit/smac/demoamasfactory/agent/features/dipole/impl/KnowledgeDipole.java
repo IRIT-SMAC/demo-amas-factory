@@ -9,10 +9,10 @@ public class KnowledgeDipole extends Knowledge implements IKnowledgeDipole {
 
     @JsonProperty
     public Double tension;
-    
+
     public Double firstPotential;
     public Double secondPotential;
-    
+
     @JsonProperty
     public Double resistor;
     public Double intensity;
@@ -79,8 +79,5 @@ public class KnowledgeDipole extends Knowledge implements IKnowledgeDipole {
     @Override
     public String toString() {
         return "Dipole";
-        // + firstTerminal + ": " + firstPotential
-        // + "V " + secondTerminal + ": " + secondPotential + "V U="
-        // + tension + "V R=" + resistor + "Ohm I=" + intensity + "A.";
     }
 }
