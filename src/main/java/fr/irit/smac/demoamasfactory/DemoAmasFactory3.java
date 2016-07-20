@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
 import fr.irit.smac.amasfactory.agent.features.IFeature;
 import fr.irit.smac.amasfactory.agent.features.impl.Feature;
 import fr.irit.smac.amasfactory.agent.features.social.impl.Port;
 import fr.irit.smac.amasfactory.agent.features.social.impl.Target;
-import fr.irit.smac.amasfactory.agent.impl.TwoStepAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler;
+import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService;
 import fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService;
 import fr.irit.smac.amasfactory.service.messaging.impl.MessagingService;
@@ -39,17 +40,18 @@ import fr.irit.smac.demoamasfactory.infrastructure.impl.DemoFactory;
 import fr.irit.smac.demoamasfactory.service.IMyServices;
 import fr.irit.smac.demoamasfactory.service.impl.MyServices;
 import fr.irit.smac.demoamasfactory.service.plot.impl.PlotService;
+import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class DemoAmasFactory3 {
 
     @SuppressWarnings("unchecked")
-    public static <T extends IMyServices<A>, A extends TwoStepAgent<F, K, S>, F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> void main(
+    public static <T extends IMyServices<A>, A extends IAgent<F, K, S>, F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> void main(
         String[] args)
             throws IOException {
 
         DemoFactory<T, A> demoFactory = new DemoFactory<>();
 
-        IDemoInfrastructure<T, A> infra = demoFactory.createInfrastructure();
+        IDemoInfrastructure<T> infra = demoFactory.createInfrastructure();
 
         infra.setServices((T) initServices());
         infra.getServices().getAgentHandlerService().setAgentMap((Map<String, A>) initAgentMap());
@@ -58,9 +60,9 @@ public class DemoAmasFactory3 {
         infra.getServices().getExecutionService().displaySimpleGui();
     }
 
-    private static Map<String, TwoStepAgent<IMyCommonFeatures, IKnowledge, ISkill<IKnowledge>>> initAgentMap() {
+    private static Map<String, IAgent<IMyCommonFeatures, IKnowledge, ISkill<IKnowledge>>> initAgentMap() {
 
-        Map<String, TwoStepAgent<IMyCommonFeatures, IKnowledge, ISkill<IKnowledge>>> agentMap = new HashMap<>();
+        Map<String, IAgent<IMyCommonFeatures, IKnowledge, ISkill<IKnowledge>>> agentMap = new HashMap<>();
         int rows = 10;
         int cols = 10;
         agentMap.put("gen 20V", createAgentUGenerator("gen 20V", "1_1", rows + "_" + cols, 20d));
@@ -91,11 +93,13 @@ public class DemoAmasFactory3 {
         return agentMap;
     }
 
-    private static <A extends TwoStepAgent<F, IKnowledge, ISkill<IKnowledge>>, F extends IMyCommonFeatures> IMyServices<A> initServices() {
+    @SuppressWarnings("unchecked")
+    private static <A extends IAgent<F, IKnowledge, ISkill<IKnowledge>>, F extends IMyCommonFeatures> IMyServices<A> initServices() {
 
         MyServices<A, F> services = new MyServices<>();
         services.setAgentHandlerService(new BasicAgentHandler<>());
-        services.setExecutionService(new TwoStepAgExecutionService<>());
+        IExecutionService<ITwoStepsAgent> executionService = new TwoStepAgExecutionService<>();
+        services.setExecutionService((IExecutionService<A>) executionService);
         services.setMessagingService(new MessagingService<>());
         services.setLoggingService(new AgentLogLoggingService<>());
         services.setPlotService(new PlotService());
@@ -108,7 +112,7 @@ public class DemoAmasFactory3 {
     }
 
     @SuppressWarnings("unchecked")
-    private static <F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> TwoStepAgent<F, K, S> createAgentNode(
+    private static <F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> IAgent<F, K, S> createAgentNode(
         String id) {
 
         AgentNode agent = new AgentNode();
@@ -126,11 +130,11 @@ public class DemoAmasFactory3 {
         agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().put("intensity",
             new Port("intensity"));
 
-        return (TwoStepAgent<F, K, S>) agent;
+        return (IAgent<F, K, S>) agent;
     }
 
     @SuppressWarnings("unchecked")
-    private static <F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> TwoStepAgent<F, K, S> createAgentResistor(
+    private static <F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> IAgent<F, K, S> createAgentResistor(
         String id, String node1,
         String node2, double resistor) {
 
@@ -165,11 +169,11 @@ public class DemoAmasFactory3 {
             ETerminal.SECOND.getName() + "PotentialDirection",
             new Target(node2, "potentialDirection", null));
 
-        return (TwoStepAgent<F, K, S>) agent;
+        return (IAgent<F, K, S>) agent;
     }
 
     @SuppressWarnings({ "unchecked" })
-    private static <F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> TwoStepAgent<F, K, S> createAgentUGenerator(
+    private static <F extends IMyCommonFeatures, K extends IKnowledge, S extends ISkill<K>> IAgent<F, K, S> createAgentUGenerator(
         String id, String node1, String node2, double tension) {
 
         AgentUGenerator agent = new AgentUGenerator();
@@ -195,7 +199,7 @@ public class DemoAmasFactory3 {
             ETerminal.SECOND.getName() + "PotentialDirection",
             new Target(node2, "potentialDirection", null));
 
-        return (TwoStepAgent<F, K, S>) agent;
+        return (IAgent<F, K, S>) agent;
     }
 
     private static void initFeaturePlot(

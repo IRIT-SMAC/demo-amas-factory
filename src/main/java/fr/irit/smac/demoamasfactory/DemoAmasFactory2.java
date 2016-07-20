@@ -15,7 +15,7 @@ public class DemoAmasFactory2 {
 
         DemoFactory<T, A> demoFactory = new DemoFactory<>();
 
-        IDemoInfrastructure<T, A> infra = demoFactory.createInfrastructure(
+        IDemoInfrastructure<T> infra = demoFactory.createInfrastructure(
             ClassLoader.getSystemResourceAsStream("config2.json"));
 
         infra.getServices().getExecutionService().step();

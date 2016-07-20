@@ -58,8 +58,8 @@ public class SkillUGenerator<K extends IKnowledgeUGenerator> extends SkillDipole
         PotentialDirection lowerMsg = new PotentialDirection(
             EFeedback.LOWER, 100d, lowerReceiver, id);
 
-        skillSocial.sendDataToTarget(idGreaterReceiver + "PotentialDirection", greaterMsg, id);
-        skillSocial.sendDataToTarget(idLowerReceiver + "PotentialDirection", lowerMsg, id);
+        skillSocial.sendDataToPortTarget(idGreaterReceiver + "PotentialDirection", greaterMsg, id);
+        skillSocial.sendDataToPortTarget(idLowerReceiver + "PotentialDirection", lowerMsg, id);
 
         logger.debug("Sent msg: UP: " + idGreaterReceiver + " DOWN: " + idLowerReceiver);
     }

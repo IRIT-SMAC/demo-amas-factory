@@ -37,9 +37,9 @@ public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>i
         if (intensity != null) {
 
             Intensity firstMsg = new Intensity(intensity, id);
-            skillSocial.sendDataToTarget(ETerminal.FIRST.getName() + "Intensity", firstMsg, id);
+            skillSocial.sendDataToPortTarget(ETerminal.FIRST.getName() + "Intensity", firstMsg, id);
             Intensity secondMsg = new Intensity(-intensity, id);
-            skillSocial.sendDataToTarget(ETerminal.SECOND.getName() + "Intensity", secondMsg, id);
+            skillSocial.sendDataToPortTarget(ETerminal.SECOND.getName() + "Intensity", secondMsg, id);
         }
     }
 
@@ -55,11 +55,11 @@ public class SkillResistor<K extends IKnowledgeResistor> extends SkillDipole<K>i
             PotentialDirection firstMsg = new PotentialDirection(
                 PotentialDirection.opposite(intensityDirection), worstIntensityCriticality,
                 knowledge.getFirstPotential(), id);
-            skillSocial.sendDataToTarget(ETerminal.FIRST.getName() + "PotentialDirection", firstMsg, id);
+            skillSocial.sendDataToPortTarget(ETerminal.FIRST.getName() + "PotentialDirection", firstMsg, id);
             
             PotentialDirection secondMsg = new PotentialDirection(
                 intensityDirection, worstIntensityCriticality, knowledge.getSecondPotential(), id);
-            skillSocial.sendDataToTarget(ETerminal.SECOND.getName() + "PotentialDirection", secondMsg, id);
+            skillSocial.sendDataToPortTarget(ETerminal.SECOND.getName() + "PotentialDirection", secondMsg, id);
 
             knowledge.setWorstIntensityCriticality(0d);
             knowledge.setIntensityDirection(null);

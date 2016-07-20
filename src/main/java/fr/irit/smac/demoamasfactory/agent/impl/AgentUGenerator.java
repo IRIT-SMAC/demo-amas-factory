@@ -4,16 +4,18 @@ import org.slf4j.Logger;
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
-import fr.irit.smac.amasfactory.agent.impl.TwoStepAgent;
+import fr.irit.smac.amasfactory.agent.impl.Agent;
 import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.IKnowledgeUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.ISkillUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
+import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class AgentUGenerator
-    extends TwoStepAgent<IMyCommonFeatures, IKnowledgeUGenerator, ISkillUGenerator<IKnowledgeUGenerator>> {
+    extends Agent<IMyCommonFeatures, IKnowledgeUGenerator, ISkillUGenerator<IKnowledgeUGenerator>>
+    implements ITwoStepsAgent {
 
     public AgentUGenerator() {
     }
@@ -51,7 +53,7 @@ public class AgentUGenerator
 
         if (knowledge.getFirstPotential() == null
             || knowledge.getSecondPotential() == null) {
-            
+
             skillSocial.sendPortToTarget(ETerminal.FIRST.getName(), id);
             skillSocial.sendPortToTarget(ETerminal.SECOND.getName(), id);
         }
