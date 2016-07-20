@@ -21,7 +21,7 @@
  */
 package fr.irit.smac.demoamasfactory.infrastructure;
 
-import fr.irit.smac.amasfactory.IInfrastructure;
+import fr.irit.smac.amasfactory.infrastructure.IInfrastructure;
 
 public interface IDemoInfrastructure<T> extends IInfrastructure<T> {
 

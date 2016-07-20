@@ -19,13 +19,14 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.demoamasfactory.agent.features;
+package fr.irit.smac.demoamasfactory.agent.features.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.features.IFeature;
 import fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures;
 import fr.irit.smac.amasfactory.agent.features.impl.Feature;
+import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
 

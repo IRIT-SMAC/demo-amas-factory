@@ -38,7 +38,6 @@ import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService
 import fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService;
 import fr.irit.smac.amasfactory.service.messaging.impl.MessagingService;
 import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
-import fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.IKnowledgeDipole.ETerminal;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.IKnowledgeUGenerator;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.KnowledgeUGenerator;
@@ -46,6 +45,7 @@ import fr.irit.smac.demoamasfactory.agent.features.dipole.generator.impl.SkillUG
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.IKnowledgeResistor;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.KnowledgeResistor;
 import fr.irit.smac.demoamasfactory.agent.features.dipole.resistor.impl.SkillResistor;
+import fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.node.IKnowledgeNode;
 import fr.irit.smac.demoamasfactory.agent.features.node.impl.KnowledgeNode;
 import fr.irit.smac.demoamasfactory.agent.features.node.impl.SkillNode;
@@ -56,8 +56,8 @@ import fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot;
 import fr.irit.smac.demoamasfactory.agent.impl.AgentNode;
 import fr.irit.smac.demoamasfactory.agent.impl.AgentResistor;
 import fr.irit.smac.demoamasfactory.agent.impl.AgentUGenerator;
+import fr.irit.smac.demoamasfactory.impl.DemoFactory;
 import fr.irit.smac.demoamasfactory.infrastructure.IDemoInfrastructure;
-import fr.irit.smac.demoamasfactory.infrastructure.impl.DemoFactory;
 import fr.irit.smac.demoamasfactory.service.IMyServices;
 import fr.irit.smac.demoamasfactory.service.impl.MyServices;
 import fr.irit.smac.demoamasfactory.service.plot.impl.PlotService;

@@ -24,8 +24,8 @@ package fr.irit.smac.demoamasfactory;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import fr.irit.smac.demoamasfactory.impl.DemoFactory;
 import fr.irit.smac.demoamasfactory.infrastructure.IDemoInfrastructure;
-import fr.irit.smac.demoamasfactory.infrastructure.impl.DemoFactory;
 import fr.irit.smac.demoamasfactory.service.IMyServices;
 
 public class DemoAmasFactory2 {

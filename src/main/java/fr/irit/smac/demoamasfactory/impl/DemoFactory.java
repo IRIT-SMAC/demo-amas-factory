@@ -19,7 +19,7 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.demoamasfactory.infrastructure.impl;
+package fr.irit.smac.demoamasfactory.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 
 import fr.irit.smac.amasfactory.impl.AmasFactory;
 import fr.irit.smac.demoamasfactory.infrastructure.IDemoInfrastructure;
+import fr.irit.smac.demoamasfactory.infrastructure.impl.DemoInfrastructure;
 import fr.irit.smac.demoamasfactory.service.IMyServices;
 
 public class DemoFactory<T extends IMyServices<A>,A> extends AmasFactory<T,A> {

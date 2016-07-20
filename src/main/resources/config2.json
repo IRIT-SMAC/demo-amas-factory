@@ -5,7 +5,7 @@
       "agentMap" : {
         "A" : {
           "commonFeatures" : {
-            "className" : "fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures",
+            "className" : "fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures",
             "featurePlot" : {
               "skill" : {
                 "className" : "fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
@@ -60,7 +60,7 @@
         },
         "B" : {
           "commonFeatures" : {
-            "className" : "fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures",
+            "className" : "fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures",
             "featurePlot" : {
               "skill" : {
                 "className" : "fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
@@ -115,7 +115,7 @@
         },
         "C" : {
           "commonFeatures" : {
-            "className" : "fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures",
+            "className" : "fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures",
             "featurePlot" : {
               "skill" : {
                 "className" : "fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
@@ -170,7 +170,7 @@
         },
         "gen 20V" : {
           "commonFeatures" : {
-            "className" : "fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures",
+            "className" : "fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures",
             "featurePlot" : {
               "skill" : {
                 "className" : "fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
@@ -247,7 +247,7 @@
         },
         "res1" : {
           "commonFeatures" : {
-            "className" : "fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures",
+            "className" : "fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures",
             "featurePlot" : {
               "skill" : {
                 "className" : "fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
@@ -336,7 +336,7 @@
         },
         "res2" : {
           "commonFeatures" : {
-            "className" : "fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures",
+            "className" : "fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures",
             "featurePlot" : {
               "skill" : {
                 "className" : "fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
@@ -425,7 +425,7 @@
         },
         "res3" : {
           "commonFeatures" : {
-            "className" : "fr.irit.smac.demoamasfactory.agent.features.MyCommonFeatures",
+            "className" : "fr.irit.smac.demoamasfactory.agent.features.impl.MyCommonFeatures",
             "featurePlot" : {
               "skill" : {
                 "className" : "fr.irit.smac.demoamasfactory.agent.features.plot.impl.SkillPlot"
