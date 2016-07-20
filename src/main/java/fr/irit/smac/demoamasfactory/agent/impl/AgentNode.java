@@ -25,16 +25,14 @@ import org.slf4j.Logger;
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
-import fr.irit.smac.amasfactory.agent.impl.Agent;
 import fr.irit.smac.demoamasfactory.agent.features.IMyCommonFeatures;
 import fr.irit.smac.demoamasfactory.agent.features.node.IKnowledgeNode;
 import fr.irit.smac.demoamasfactory.agent.features.node.ISkillNode;
 import fr.irit.smac.demoamasfactory.agent.features.plot.IKnowledgePlot;
 import fr.irit.smac.demoamasfactory.agent.features.plot.ISkillPlot;
-import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class AgentNode
-    extends Agent<IMyCommonFeatures, IKnowledgeNode, ISkillNode<IKnowledgeNode>> implements ITwoStepsAgent {
+    extends TwoStepAgent<IMyCommonFeatures, IKnowledgeNode, ISkillNode<IKnowledgeNode>> {
 
     public AgentNode() {
         super();
@@ -73,7 +71,8 @@ public class AgentNode
         skill.adjustPotential();
 
         knowledgeSocial.getTargetMap()
-            .forEach((k, v) -> skillSocial.sendDataToPortTarget(v.getAgentId().concat(v.getPortTarget()), knowledge.getPotential().getValue(), id));
+            .forEach((k, v) -> skillSocial.sendDataToPortTarget(v.getAgentId().concat(v.getPortTarget()),
+                knowledge.getPotential().getValue(), id));
         skill.cleanKnowledge();
 
         skillSocial.clearPortMap();

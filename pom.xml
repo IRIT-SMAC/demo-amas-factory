@@ -36,6 +36,7 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin-version}</version>
 				<configuration>
@@ -126,11 +127,6 @@
 		</dependency>
 		<dependency>
 			<groupId>fr.irit.smac</groupId>
-			<artifactId>amas-factory</artifactId>
-			<version>${amas-factory-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.irit.smac</groupId>
 			<artifactId>agent-plot</artifactId>
 			<version>0.1</version>
 		</dependency>
@@ -138,6 +134,11 @@
 			<groupId>fr.irit.smac</groupId>
 			<artifactId>avt</artifactId>
 			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.irit.smac</groupId>
+			<artifactId>amas-factory</artifactId>
+			<version>${amas-factory-version}</version>
 		</dependency>
 	</dependencies>
 </project>
