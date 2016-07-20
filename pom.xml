@@ -4,7 +4,7 @@
 
 	<groupId>fr.irit.smac</groupId>
 	<artifactId>demo-amas-factory</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 	<name>demo-amas-factory</name>
 	<organization>
@@ -15,12 +15,23 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<amas-factory-version>0.2-SNAPSHOT</amas-factory-version>
+		<amas-factory-version>0.2</amas-factory-version>
 		<java-version>1.8</java-version>
 		<maven-compiler-plugin-version>3.5.1</maven-compiler-plugin-version>
 		<license-maven-plugin-version>1.7</license-maven-plugin-version>
 	</properties>
 
+
+	<repositories>
+		<repository>
+			<id>IRIT-SMAC-mvn-repo-releases</id>
+			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/releases</url>
+		</repository>
+		<repository>
+			<id>IRIT-SMAC-mvn-repo-snapshots</id>
+			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/snapshots</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
@@ -117,6 +128,16 @@
 			<groupId>fr.irit.smac</groupId>
 			<artifactId>amas-factory</artifactId>
 			<version>${amas-factory-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.irit.smac</groupId>
+			<artifactId>agent-plot</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.irit.smac</groupId>
+			<artifactId>avt</artifactId>
+			<version>0.1</version>
 		</dependency>
 	</dependencies>
 </project>
