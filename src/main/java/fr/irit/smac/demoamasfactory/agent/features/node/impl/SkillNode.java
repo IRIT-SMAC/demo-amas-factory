@@ -1,3 +1,24 @@
+/*
+ * #%L
+ * demo-amas-factory
+ * %%
+ * Copyright (C) 2016 IRIT - SMAC Team and Brennus Analytics
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
 package fr.irit.smac.demoamasfactory.agent.features.node.impl;
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
@@ -47,19 +68,18 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
             intensitiesSum += intensity;
         }
 
-        if (!knowledge.isReceivedPdr() && intensitiesSum != 0) {
-            if (knowledge.getPotentialDirection() == null
-                && !knowledge.getPreviousISumChange().equals(intensitiesSum)) {
-                logger.debug("Isum: " + intensitiesSum + " previousChange: "
-                    + knowledge.getPreviousISumChange());
-                knowledge.setPreviousISumChange(intensitiesSum);
-                if (intensitiesSum > 0) {
-                    knowledge.getPotential().adjustValue(EFeedback.GREATER);
-                }
-                else if (intensitiesSum < 0) {
-                    knowledge.getPotential().adjustValue(EFeedback.LOWER);
-                }
+        if (!knowledge.isReceivedPdr() && intensitiesSum != 0 && knowledge.getPotentialDirection() == null
+            && !knowledge.getPreviousISumChange().equals(intensitiesSum)) {
+            logger.debug("Isum: " + intensitiesSum + " previousChange: "
+                + knowledge.getPreviousISumChange());
+            knowledge.setPreviousISumChange(intensitiesSum);
+            if (intensitiesSum > 0) {
+                knowledge.getPotential().adjustValue(EFeedback.GREATER);
             }
+            else if (intensitiesSum < 0) {
+                knowledge.getPotential().adjustValue(EFeedback.LOWER);
+            }
+
         }
 
     }
@@ -91,11 +111,10 @@ public class SkillNode<K extends IKnowledgeNode> extends Skill<K>implements ISki
                 if (o instanceof PotentialDirection) {
                     PotentialDirection p = (PotentialDirection) o;
                     knowledge.setReceivedPdr(true);
-                    if (p.knownValue.equals(knowledge.getPotential().getValue())
-                        && knowledge.getWorstPotentialCriticality() < p.criticality) {
-                        // logger.debug("received " + pdr);
-                        knowledge.setWorstPotentialCriticality(p.criticality);
-                        knowledge.setPotentialDirection(p.direction);
+                    if (p.getKnownValue().equals(knowledge.getPotential().getValue())
+                        && knowledge.getWorstPotentialCriticality() < p.getCriticality()) {
+                        knowledge.setWorstPotentialCriticality(p.getCriticality());
+                        knowledge.setPotentialDirection(p.getDirection());
                     }
                 }
             });

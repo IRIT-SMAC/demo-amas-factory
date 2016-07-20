@@ -6,15 +6,106 @@
 	<artifactId>demo-amas-factory</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
 	<name>demo-amas-factory</name>
+	<organization>
+		<name>IRIT - SMAC Team and Brennus Analytics</name>
+		<url>http://irit.fr/-SMAC-team-</url>
+	</organization>
+	<inceptionYear>2016</inceptionYear>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<amas-factory-version>0.2-SNAPSHOT</amas-factory-version>
+		<java-version>1.8</java-version>
+		<maven-compiler-plugin-version>3.5.1</maven-compiler-plugin-version>
+		<license-maven-plugin-version>1.7</license-maven-plugin-version>
 	</properties>
 
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin-version}</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+			<!-- Handle license files -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>${license-maven-plugin-version}</version>
+				<configuration>
+					<licenseName>lgpl_v3</licenseName>
+					<roots>
+						<root>src/main/java</root>
+					</roots>
+					<!-- Break some files otherwise -->
+					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+				</configuration>
+				<executions>
+					<execution>
+						<id>first</id>
+						<goals>
+							<goal>update-file-header</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+					<execution>
+						<id>update-license</id>
+						<goals>
+							<goal>update-project-license</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											license-maven-plugin
+										</artifactId>
+										<versionRange>
+											[${license-maven-plugin-version},)
+										</versionRange>
+										<goals>
+											<goal>
+												update-file-header
+											</goal>
+											<goal>
+												update-project-license
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

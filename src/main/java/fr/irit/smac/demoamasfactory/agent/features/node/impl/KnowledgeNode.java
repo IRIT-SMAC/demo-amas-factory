@@ -1,3 +1,24 @@
+/*
+ * #%L
+ * demo-amas-factory
+ * %%
+ * Copyright (C) 2016 IRIT - SMAC Team and Brennus Analytics
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
 package fr.irit.smac.demoamasfactory.agent.features.node.impl;
 
 import java.util.HashMap;
@@ -11,13 +32,13 @@ import fr.irit.smac.libs.tooling.avt.IAVT;
 
 public class KnowledgeNode extends Knowledge implements IKnowledgeNode {
 
-    public Double worstPotentialCriticality = 0d;
+    private Double worstPotentialCriticality = 0d;
 
-    public EFeedback potentialDirection;
+    private EFeedback potentialDirection;
 
-    public IAVT potential;
+    private IAVT potential;
 
-    public Map<String, Double> intensities = new HashMap<String, Double>();
+    private Map<String, Double> intensities = new HashMap<>();
 
     private Double previousISumChange = 0d;
 
@@ -25,7 +46,7 @@ public class KnowledgeNode extends Knowledge implements IKnowledgeNode {
 
     public KnowledgeNode() {
         super();
-        this.potential = new AVTBuilder().deltaMin(.001).deltaMax(100).build();
+        potential = new AVTBuilder().deltaMin(.001).deltaMax(100).build();
     }
 
     @Override
