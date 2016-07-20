@@ -50,7 +50,7 @@ public class DemoFactory<T extends IMyServices<A>,A> extends AmasFactory<T,A> {
 
         LOGGER.info("End of the initialization of the infrastructure");
 
-        return (IDemoInfrastructure<T>) infrastructure;
+        return infrastructure;
     }
 
     @Override
